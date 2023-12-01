@@ -31,7 +31,7 @@ const projectSchema = Schema(
         },
         projectExpiration: {
             type: Number,
-            required: true,
+            required: false,
             //Validation: must be at a latter date: projectDate < projectExpiration
         },
         goal: {
