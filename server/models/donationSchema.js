@@ -15,7 +15,7 @@ const donationSchema = Schema(
         },
         donationDate: {
             type: Date,
-            default: new Date.now(),
+            default: Date.now(),
             get: (timestamp) =>  format_date(timestamp)
         },
         //donationType? Maybe in the Project model
