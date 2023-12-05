@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const { commentSchema } = require('./commentSchema');
-const { donationSchema } = require('./donationsSchema');
+const { donationSchema } = require('./donationSchema');
 
 //Importing plug-ins in order to be able to compute virtual properties and use getters when retrieving 'lean' documents
 const mongooseLeanVirtuals = require('mongoose-lean-virtuals');
@@ -50,7 +50,7 @@ donorSchema
 donorSchema
     .virtual('donationTotal')
     .get(function () {
-        return //Total amount donated amongst all individual donations
+        return this.donations.reduce((total, donation) => total + donation.amount, 0);//Total amount donated amongst all individual donations
     });
 
 //Attaching the plug-ins to the schema.
