@@ -1,6 +1,5 @@
-// loginForm.jsx
-
 import React, { useState } from 'react';
+import gql from 'graphql-tag';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
