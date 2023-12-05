@@ -22,7 +22,8 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^7.0.2",
         "mongoose-lean-getters": "^1.1.0",
-        "mongoose-lean-virtuals": "^0.9.1"
+        "mongoose-lean-virtuals": "^0.9.1",
+        "stripe": "^14.7.0"
     },
     "devDependencies": {
         "nodemon": "^2.0.3"

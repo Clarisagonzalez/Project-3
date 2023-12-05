@@ -1,21 +1,22 @@
 const { Schema, model } = require('mongoose');
 
-const { commentSchema } = require('./commentSchema');
-const { donationSchema } = require('./donationsSchema');
+const  commentSchema  = require('./commentSchema');
+const  donationSchema  = require('./donationSchema');
 
 //Importing plug-ins in order to be able to compute virtual properties and use getters when retrieving 'lean' documents
 const mongooseLeanVirtuals = require('mongoose-lean-virtuals');
 const mongooseLeanGetters = require('mongoose-lean-getters');
 
 // Schema to create User model
-const donorSchema = new Schema(
+const userSchema = new Schema(
     {
-        donorname: {
+        username: {
             type: String,
             unique: true,
             required: true,
             trim: true,
-            //Add some validation: length, alpha-numeric?
+            minLen: 5,
+            //match: /^[A-Z0-9-_]{3, }$/i //The username must contain at least 3 characters, they can be letters(lower or uppercase), numbers, dashes or underscores
         },
         email: {
             type: String,
@@ -27,14 +28,18 @@ const donorSchema = new Schema(
         password: {
             type: String,
             required: true,
-            //Add some validation: length, special symbol, number, upper and lowercase
+            minLength: 8,
+            //match: /[0-9]+(\W)+(\S)+/ //The password must contain at one number and at least one non-word character; it must not contain whitespaces( at least one more non-whitespace character is required)
         },
 
         donations: [donationSchema],
 
-        comments: [commentSchema]
+        comments: [commentSchema],
 
-        projects: []
+        projects: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Project'
+        }] 
     },
     {
         toJSON: {
@@ -43,21 +48,29 @@ const donorSchema = new Schema(
         id: false,
     }
 );
-//Defining a getter for the 'friendCount' virtual property.
-donorSchema
+//Defining a getter for the 'donationCount' virtual property.
+userSchema
     .virtual('donationCount')
-    .get(function () {
+    .get(function() {
         return this.donations.length;
     });
 
-donorSchema
+userSchema
     .virtual('donationTotal')
-    .get(function () {
-        return //Total amount donated amongst all individual donations
+    .get(function() {
+
+        return this.donations.reduce((total, current) => total + current,0);//Total amount donated amongst all individual donations
     });
 
+userSchema
+    .virtual('numberOfProjects')
+    .get(function() {
+        return this.projects.length;
+    })
 //Attaching the plug-ins to the schema.
 userSchema.plugin(mongooseLeanVirtuals);
 userSchema.plugin(mongooseLeanGetters);
 
-module.exports = model('donor', donorSchema);
+const User = model('User', userSchema);
+
+module.exports =  User ;

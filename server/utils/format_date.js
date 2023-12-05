@@ -19,11 +19,11 @@ function formatDate(date) {
     const monthNum = new Date(date).getMonth();
     const month = months[monthNum];
     let day;
-    if(new Date(date).getDate().endsWith(1) && new Date(date).getDate() !== 11){
+    if(new Date(date).getDate()===1 || new Date(date).getDate()===21 || new Date(date).getDate()===31 && new Date(date).getDate() !== 11){
         day = `${new Date(date).getDate()}st`;
-    } else if(new Date(date).getDate().endsWith(2) && new Date(date).getDate() !== 12) {
+    } else if(new Date(date).getDate()===2 || new Date(date).getDate()===22 && new Date(date).getDate() !== 12) {
         day = `${new Date(date).getDate()}nd`;
-    } else if (new Date(date).getDate().endsWith(3) && new Date(date).getDate() !== 13) {
+    } else if (new Date(date).getDate()===3 && new Date(date).getDate() !== 13) {
         day = `${new Date(date).getDate()}rd`;
     } else {
         day = `${new Date(date).getDate()}th`;
