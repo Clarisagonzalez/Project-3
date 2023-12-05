@@ -1,4 +1,5 @@
-import React from 'react';
+import { useLocation,  useNavigate } from 'react-router-dom';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 
 const Footer = () => {
   const styles = {
@@ -18,29 +19,33 @@ const Footer = () => {
     },
   };
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
-    <footer style={styles.footer}>
-      <div style={styles.container} className="footer-content">
-        <div className="contact-info">
+    <Container style={styles.footer} className='fluid'>
+      <Row style={styles.container} className="footer-content">
+        <Col className="contact-info">
           <h3>Contact Us</h3>
           <p>Email: contact@example.com</p>
           <p>Phone: +1 (123) 456-7890</p>
-        </div>
+        </Col>
 
-        <div className="social-media">
+        <Col>
           <h3>Follow Us</h3>
-          <a href="https://twitter.com/example" target="_blank" rel="noopener noreferrer">Twitter</a>
-          <a href="https://facebook.com/example" target="_blank" rel="noopener noreferrer">Facebook</a>
+          <div><a href="https://twitter.com/example" target="_blank" rel="noopener noreferrer">Twitter</a></div>
+          <div><a href="https://facebook.com/example" target="_blank" rel="noopener noreferrer">Facebook</a></div>
           {/* Add more links if needed */}
-        </div>
-      </div>
-
-      <div style={styles.text} className="copyright">
-        <p>&copy; 2023 Your Fundraising Campaign. All rights reserved.</p>
-      </div>
-    </footer>
+        </Col>
+      </Row>
+      <Row>
+      <Col style={styles.text} className="copyright">
+        <p>&copy;{new Date().getFullYear()} Your Fundraising Campaign. All rights reserved.</p>
+        {location.pathname !== '/' && <Button className='btn btn-lg' onClick= {() => navigate(-1) }>Go Back</Button>}
+      </Col>
+      </Row>
+    </Container>
   );
 };
 
 export default Footer;
-
