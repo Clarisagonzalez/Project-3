@@ -7,7 +7,7 @@ export default function Projects() {
         <Container>
             <Row>
                { projects.map(project => 
-                (<SingleProject {...project}  />))}
+                (<SingleProject {...project} key={projects.indexOf(project)} />))}
             </Row>
         </Container>
     );

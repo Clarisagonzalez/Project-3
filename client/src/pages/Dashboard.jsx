@@ -1,10 +1,9 @@
-import { Container, Row, Button, Form} from 'react-bootstrap';
+import { Container, Row, Button, Form } from 'react-bootstrap';
 import { projects } from '../utils/dataArrays';
 import SingleProject from './SingleProject';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
-import { ADD_PROJECT } from '../utils/mutations';
+import { ADD_PROJECT, UPDATE_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 export default function Dashboard() {
@@ -16,51 +15,114 @@ export default function Dashboard() {
     goalAmount: ''
   };
 
+  const currentUser = {
+    username: Auth.getProfile().data.username,
+    email: Auth.getProfile().data.email,
+    password: ''
+  };
+
   const [formData, setFormData] = useState(initialState);
-  const [addProject, { error }] = useMutation(ADD_PROJECT);
-  const navigate = useNavigate();
+  const [userData, setUserData] = useState(currentUser)
+  const [addProject] = useMutation(ADD_PROJECT);
+  const [updateUser] = useMutation(UPDATE_USER);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  
+  const handleUpdate = (e) => {
+    const { name, value } = e.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await addProject({
-      variables: { projectName: formData.projectName, 
-        projectDescription: formData.projectDescription, 
-        expiresIn: parseInt(formData.expiresIn), 
-        goalAmount: parseFloat(formData.goalAmount), 
-        userId: Auth.getProfile().data._id}
-    });
-    projects.push(data);
-    setFormData(initialState);
-  } catch(error) {
-    throw error
-  }
+        variables: {
+          projectName: formData.projectName,
+          projectDescription: formData.projectDescription,
+          expiresIn: parseInt(formData.expiresIn),
+          goalAmount: parseFloat(formData.goalAmount),
+          userId: Auth.getProfile().data._id
+        }
+      });
+      projects.push(data);
+      setFormData(initialState);
+    } catch (error) {
+      throw error
+    }
+  };
+
+  let password;
+
+  const handleUpdateSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await updateUser({
+        variables: {
+          ...userData
+        }
+      });
+      setUserData(data);
+    } catch (err) {
+      throw err;
+    }
   };
 
   return (
     <>
       <Container>
-        <h1>Your campaigns</h1>
-        <Row>
-          {projects.map(project =>
-            (<SingleProject {...project} key={projects.indexOf(project)}/>))}
-        </Row>
+        <h1>Welcome to your Dashboard, <strong><i>{Auth.getProfile().data.username}</i></strong>! What do you want to do today?:</h1>
       </Container>
       <Container>
-        <h1>Causes you have supported</h1>
+        <h2>See your campaigns/projects</h2>
         <Row>
           {projects.map(project =>
             (<SingleProject {...project} key={projects.indexOf(project)} />))}
         </Row>
       </Container>
+
       <Container>
-        <h1>Want to start other campaigns/projects? Fill the form below:</h1>
+        <h2>Causes you have supported</h2>
+        <Row>
+          {projects.map(project =>
+            (<SingleProject {...project} key={projects.indexOf(project)} />))}
+        </Row>
+      </Container>
+
+      <Container>
+        <h2>Do you want to update your data?</h2>
+        <Form className="align-center bg-secondary text-center" onSubmit={handleUpdateSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>
+              Update your username
+              <Form.Control type="text" name="username" value={userData.username} onChange={handleUpdate} />
+            </Form.Label>
+          </Form.Group>
+          <br />
+          <Form.Group className="mb-3">
+            <Form.Label>
+              Update your email
+              <Form.Control type="email" name="email" value={userData.email} onChange={handleUpdate} />
+            </Form.Label>
+          </ Form.Group>
+          <br />
+          <Form.Group className="mb-3">
+            <Form.Label>
+              Update your password
+              <Form.Control type="password" name="password" id="password" value={userData.password} onChange={() => { 
+                handleUpdate(event)}}/>
+            </Form.Label>
+          </ Form.Group>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </Container>
+
+      <Container>
+        <h2>Want to start other campaigns/projects? Fill the form below:</h2>
         <Row>
           <div>
             <h2>Add Project</h2>
@@ -72,20 +134,20 @@ export default function Dashboard() {
                 </Form.Label>
               </Form.Group>
               <br />
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3">
                 <Form.Label>
                   Give a brief description of said campaign (no more than 500 characters!):
                   <Form.Control type="text" name="projectDescription" value={formData.projectDescription} onChange={handleChange} />
                 </Form.Label>
               </ Form.Group>
               <br />
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3">
                 <Form.Label>
                   What will be the deadline to donate money for the campaign?
                   <Form.Control type="text" name="expiresIn" value={formData.expiresIn} onChange={handleChange} />
                 </Form.Label>
               </ Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3">
                 <Form.Label>
                   What is the goal amount for the campaign?
                   <Form.Control type="text" name="goalAmount" value={formData.goalAmount} onChange={handleChange} />
@@ -99,4 +161,4 @@ export default function Dashboard() {
       </Container>
     </>
   );
-}
+};

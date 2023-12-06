@@ -92,7 +92,9 @@ const resolvers = {
         if (context.user) {
             return await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { username, email, password },
+                {   username: username || context.user.username, 
+                    email: email || context.user.email, 
+                    password: password || context.user.password },
                 { new: true, runValidators: true }
             );
         }
