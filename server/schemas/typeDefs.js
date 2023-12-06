@@ -52,7 +52,7 @@ const typeDefs = `
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        addProject(projectName: String!, projectDescription: String!, expiresIn: Int, goalAmount: Float): User
+        addProject(projectName: String!, projectDescription: String!, expiresIn: Int!, goalAmount: Float!, userId: ID!): User
         addComment(commentText: String!): Comment
         upvoteComment(commentId: ID!,upvote: Boolean): Comment
         addReply(replyText: String!): Comment

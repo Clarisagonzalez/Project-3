@@ -25,12 +25,17 @@ mutation login($email: String!, $password: String!){
 }`;
 
 export const ADD_PROJECT = gql`
-mutation addProject($projectName: String!, $projectDescription: String!, $expiresIn: Int, $goalAmount: Float!){
-    addProject(projectName: $projectName, projectDescription: $projectDescription, expiresIn: $expiresIn, goalAmount: $goalAmount ) {
+mutation addProject($projectName: String!, $projectDescription: String!, $expiresIn: Int!, $goalAmount: Float!, $userId: ID!){
+    addProject(projectName: $projectName, projectDescription: $projectDescription, expiresIn: $expiresIn, goalAmount: $goalAmount, userId: $userId) {
+       username
+       email
+       projects{
+        _id
         projectName
         projectDescription
         expiresIn
         goalAmount
+       }
     }
 }`;
 

@@ -12,7 +12,7 @@ const LoginForm = () => {
     password: '',
   };
   const [formData, setFormData] = useState(initialState);
-  const [login, { error }] = useMutation(LOGIN);
+  const [login, { error, data}] = useMutation(LOGIN);
   const navigate = useNavigate();
 
 
@@ -23,12 +23,17 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try{
     const { data } = await login({
       variables: { ...formData }
     });
-    error? console.error(error) : Auth.login(data.login.token);
-    navigate('/');
+    console.log(data.login);
+    Auth.login(data.login.token);
     setFormData(initialState);
+
+  } catch(err) {
+    throw err;
+  }
   };
 
   return (

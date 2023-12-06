@@ -16,13 +16,14 @@ const styles = {
 const Header = () => {
   return (
     <Container style={styles.header}>
-        {/* Logo */}
-        <img src="/logo.png" alt="Logo" style={styles.logo} />
+      {/* Logo */}
+      <img src="/logo.png" alt="Logo" style={styles.logo} />
       <Row>
-          <Col sm={12} md={4} ><li><a href="/">Home</a></li></Col>
-          <Col sm={12} md={4} ><li><a href="/campaigns">Campaigns</a></li></Col>
-          <Col sm={12} md={4} ><li><a href="/about">About Us</a></li></Col>
-          {/*add more links if needed */}
+        <Col sm={12} md={3} ><li>Get Started donating/campaigning/creating with the following links:</li></Col>
+        <Col sm={12} md={3} ><li><a href="/about">About Us</a></li></Col>
+        <Col sm={12} md={3} ><li><a href="/">How to start donating</a></li></Col>
+        <Col sm={12} md={3} ><li><a href="/campaigns">How to set up a campaign</a></li></Col>
+        {/*add more links if needed */}
       </Row>
     </Container>
   );

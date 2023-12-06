@@ -1,22 +1,22 @@
 import { Col, Card, } from 'react-bootstrap';
 
 
-function SingleProject(props) {
+function SingleProject({ projectName, title="This Title", projectDate= '', projectDescription, links='http://github.io'}) {
 
     return (
-        <Col sm={12} md={6} lg={4}>
+        <Col sm={12} md={6} lg={4} >
             <Card >
                 <Card.Header>
-                    {props.projectName}
+                    {projectName}
                 </Card.Header>
-                <Card.Title>{props.title}</Card.Title>
-                <Card.Subtitle> {props.projectDate}</Card.Subtitle>
+                <Card.Title>{title}</Card.Title>
+                <Card.Subtitle> {projectDate}</Card.Subtitle>
                 <Card.Body>
-                  {props.projectDescription}
+                  {projectDescription}
                     <Card.Img src='/logo512.png'/>
                 </Card.Body>
                 <Card.Footer>
-                   {props.links}
+                   <a href={links}>{links}</a>
                 </Card.Footer>
             </Card>
         </Col>

@@ -10,6 +10,7 @@ import LoginForm from './pages/LoginForm';
 import SignUp from './pages/Sign-Up';
 import Projects from './pages/Projects';
 import {Donation} from './pages/Donation';
+import Dashboard from './pages/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,9 @@ const router = createBrowserRouter([
       }, {
         path: '/projects/:id',
         element: <SingleProject />
+      }, {
+        path: '/dashboard',
+        element: <Dashboard />
       }
     ]
   }

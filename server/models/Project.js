@@ -21,7 +21,7 @@ const projectSchema = new Schema(
             type: String,
             required: true,
             minLength: 10,
-            maxLength: 280
+            maxLength: 500
         },
        /* projectImage: {
             type: Blob,
@@ -42,6 +42,10 @@ const projectSchema = new Schema(
             type: Number,
             required: true,
             //Decimal: 2 places
+        },
+        userId: {
+            type: Schema.Types.ObjectId, //The ID of the user who creates the project
+            required: true
         },
         comments: [commentSchema], 
         donations: [donationSchema]

@@ -28,7 +28,6 @@ const SignUp = () => {
       variables: { ...formData }
     });
     error? console.error(error) : Auth.login(data.addUser.token);
-
     navigate('/');
     setFormData(initialState);
   };

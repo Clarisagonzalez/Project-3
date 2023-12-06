@@ -54,14 +54,14 @@ const resolvers = {
                 throw AuthenticationError;
             }
 
-            const token = signToken(user);
+            const token = signToken({ username: user.username, email: user.email, _id: user._id});
 
             return { token, user };
         },
     
    addProject: async (parent, { projectName, projectDescription, expiresIn, goalAmount }, context) => {
         if (context.user) {
-            const newProject = await Project.create({ projectName, projectDescription, expiresIn, goalAmount });
+            const newProject = await Project.create({ projectName: projectName, projectDescription: projectDescription, expiresIn: expiresIn, goalAmount: goalAmount, userId: context.user._id });
 
             return await User.findOneAndUpdate(
                 { _id: context.user._id },
