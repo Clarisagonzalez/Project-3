@@ -1,21 +1,4 @@
-import React from 'react';
-
-const Header = () => {
-  return (
-    <header style={styles.header}>
-        {/* Logo */}
-        <img src="/logo.png" alt="Logo" style={styles.logo} />
-      <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/campaigns">Campaigns</a></li>
-          <li><a href="/about">About Us</a></li>
-          {/*add more links if needed */}
-        </ul>
-      </nav>
-    </header>
-  );
-};
+import { Container, Row, Col } from 'react-bootstrap';
 
 const styles = {
   header: {
@@ -29,5 +12,23 @@ const styles = {
     height: 'auto',
   },
 };
+
+const Header = () => {
+  return (
+    <Container style={styles.header}>
+      {/* Logo */}
+      <img src="/logo.png" alt="Logo" style={styles.logo} />
+      <Row>
+        <Col sm={12} md={3} ><li>Get Started donating/campaigning/creating with the following links:</li></Col>
+        <Col sm={12} md={3} ><li><a href="/about">About Us</a></li></Col>
+        <Col sm={12} md={3} ><li><a href="/">How to start donating</a></li></Col>
+        <Col sm={12} md={3} ><li><a href="/campaigns">How to set up a campaign</a></li></Col>
+        {/*add more links if needed */}
+      </Row>
+    </Container>
+  );
+};
+
+
 
 export default Header;

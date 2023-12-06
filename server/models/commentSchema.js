@@ -5,21 +5,39 @@ const commentSchema = Schema(
     {   
         commentAuthor: {
             type: Schema.Types.ObjectId,
-            ref: 'donor'
+            ref: 'User'
         },
         commentText: {
             type: String,
             required: true,
             trim: true,
-            //Add length validation?
-            //upvotes? downvotes? => virtuals?
-            //reply? By the author of the fundraiser
+            minLength: 10,
+            maxLenght: 280,
+           
         },
         commentDate: {
             type: Date,
-            default: Date.now(),
+            default:  Date.now,
             get: (timestamp) =>  format_date(timestamp)
-        }
+        },
+        upvotes: {
+            type: Number,
+            default: 0
+        },
+        projectId: {
+            type: Schema.Types.ObjectId // The project being commented on by the user
+        },
+        reply: [
+            {
+                replyText: {
+                    type: String,
+                    minLength: 10,
+                    maxLength: 280
+                }
+            },
+               { fundraiserId: Schema.Types.ObjectId }//The _id of the person who is fundraising for the cause.
+        
+        ]
 
 }, {
     toJSON: {
