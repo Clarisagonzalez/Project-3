@@ -28,16 +28,18 @@ const resolvers = {
 
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
+            try {
             const isUserNameTaken = await User.findOne({ username: username });
-            if (isUserNameTaken) return AuthenticationError;
+            if (isUserNameTaken) throw AuthenticationError;
 
             const isEmailTaken = await User.findOne({ email: email });
 
-            if (isEmailTaken) return AuthenticationError;
+            if (isEmailTaken) throw AuthenticationError;
 
             const user = await User.create({ username, email, password });
-            signToken(user);
+            const token = signToken(user);
             return { token, user };
+            } catch(err) { console.error(err)}
         },
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });

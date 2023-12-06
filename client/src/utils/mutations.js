@@ -7,16 +7,7 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
         user {
             username
             email
-            projects {
-                projectName
-                projectdescription
-            }
-            comments {
-                commentText
-            }
-            donations {
-                amount
-            }
+            password
         }
     }
 }`;
@@ -28,16 +19,7 @@ mutation login($email: String!, $password: String!){
         user  {
             username
             email
-            projects {
-                projectName
-                projectdescription
-            }
-            comments {
-                commentText
-            }
-            donations {
-                amount
-            }
+            password
         }
     }
 }`;
@@ -62,9 +44,10 @@ mutation addComment($commentText: String!){
 }`;
 
 export const UPDATE_USER = gql`
-mutation updateUser($username: String, $email: String, $password: String)
+mutation updateUser($username: String, $email: String, $password: String){
     updateUser(username: $username, email: $email, password: $password) {
         username
         email
         _id
-    }`
+    }
+}`

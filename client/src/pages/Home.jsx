@@ -6,7 +6,7 @@ export const Home = () => {
     <Container style={{background:'lightgray'}}>
       <Carousel style={{ maxWidth: '50vw', margin: 'auto'}}>
         <Carousel.Item>
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <Image src="/images/Donation.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
             <h3>First slide label</h3>
@@ -15,7 +15,7 @@ export const Home = () => {
           </div>
         </Carousel.Item>
         <Carousel.Item className=' max-vh-10'>
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <Image src="/images/Planning-a-Charity-Event.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
             <h3>Second slide label</h3>
@@ -24,7 +24,7 @@ export const Home = () => {
           </div>
         </Carousel.Item>
         <Carousel.Item className=' max-vh-10'>
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <Image src="/images/plantatree.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
             <h3>Third slide label</h3>
@@ -35,7 +35,7 @@ export const Home = () => {
           </div>
         </Carousel.Item>
         <Carousel.Item >
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <Image src="/logo512.png" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
             <h3>Fourth slide label</h3>
@@ -46,7 +46,7 @@ export const Home = () => {
           </div>
         </Carousel.Item>
         <Carousel.Item className=' max-vh-10'>
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <Image src="/logo512.png" className='text-center' style={{ height: '50vh', width: 'auto'}} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
             <h3>Fifth slide label</h3>

@@ -1,24 +1,34 @@
 import { useState } from 'react';
-import gql from 'graphql-tag';
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../utils/mutations';
+import Auth from '../utils/auth';
+
 import { Button, Form } from 'react-bootstrap';
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({
+  const initialState = {
     email: '',
     password: '',
-  });
+  };
+  const [formData, setFormData] = useState(initialState);
+  const [login, { error }] = useMutation(LOGIN);
+  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // ****I need to add logic for sumbitting the data using GraphQL
-    // Once logged In user needs to be redirected to new page****
-    // 
+    const { data } = await login({
+      variables: { ...formData }
+    });
+    error? console.error(error) : Auth.login(data.login.token);
+    navigate('/');
+    setFormData(initialState);
   };
 
   return (
