@@ -55,4 +55,7 @@ mutation updateUser($username: String, $email: String, $password: String){
         email
         _id
     }
-}`
+}`;
+/*
+export const MAKE_DONATION = gql `
+`;*/

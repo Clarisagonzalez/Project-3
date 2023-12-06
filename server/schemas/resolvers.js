@@ -12,7 +12,7 @@ const resolvers = {
             return await User.findById(_id).populate('donations').populate('comments').populate('projects').lean({ getters: true, virtuals:true });
         },
         projects: async () => {
-            return await Project.find().populate('donations').populate('comments').lean({ getters: true, virtuals:true });
+            return await Project.find({}).lean({ getters: true, virtuals:true });
         },
         project: async (parent, { _id }) => {
             return await Project.findById(_id).populate('donations').populate('comments').lean({ getters: true, virtuals: true });
@@ -100,6 +100,18 @@ const resolvers = {
         }
         throw AuthenticationError;
     },
+    /*Could serve as example to implement Stripe
+        addOrder: async (parent, { products }, context) => {
+            if (context.user) {
+              const order = new Order({ products });
+      
+              await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+      
+              return order;
+            }
+      
+            throw AuthenticationError;
+          },*/
    /* makeDonation: async (parent, { projectId, amount }, context) => {
         if (context.user) {
             const newDonation = { projectId, amount };
