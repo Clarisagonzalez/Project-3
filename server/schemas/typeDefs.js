@@ -18,6 +18,7 @@ const typeDefs = `
         goalAmount: Float
         comments: [Comment]!
         donations: [Donation]!
+        userId: ID!
     }
 
     type Comment {
@@ -46,7 +47,7 @@ const typeDefs = `
         user(_id: ID!): User
         projects: [Project]
         project(_id: ID!): Project
-        me: Auth
+        myProjects: [Project]
         }
 
     type Mutation {

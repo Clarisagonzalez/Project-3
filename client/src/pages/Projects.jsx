@@ -6,7 +6,10 @@ import { useEffect } from 'react';
 import Auth from '../utils/auth'
 
 export default  function Projects() {
-    useEffect(() => document.title = `${Auth.getProfile().data.username} is seeing all projects`, [])
+    useEffect(() => {
+        document.title = `${Auth.getProfile().data.username} is seeing all projects`
+        return;
+    }, [])
     const { data, loading } = useQuery(QUERY_ALL_PROJECTS);
 
     const projects = data?.projects || [];

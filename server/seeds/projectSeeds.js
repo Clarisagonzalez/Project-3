@@ -10,7 +10,7 @@ const projects = [
     {
         projectName: 'Project 2',
         projectDescription:'Description of Project 2',
-        projectImage: '/images/project2.png',
+        projectImage: '/public/images/project2.png',
         expiresIn: 25,
         goalAmount: 10000.00,
         userId: '6570dc2a32b7ba939510ba43'

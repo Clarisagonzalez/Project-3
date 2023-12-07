@@ -67,7 +67,7 @@ query singleUser($_id: ID){
   }
 `;
 
-export const QUERY_USERS = gql`
+export const QUERY_ALL_USERS = gql`
 query allUsers {
     users {
         _id
@@ -86,13 +86,16 @@ query allUsers {
     }
 }
 `
-export const ME = gql`
-query me {
-  me{
-    _id: ID
-    username: String
-    email: String
-    
+export const MY_PROJECTS = gql`
+query myProjects {
+    projects {
+      _id
+      projectName
+      projectDescription
+      expiresIn
+      goalAmount
+      projectImage
+      userId
   }
 }
 `;

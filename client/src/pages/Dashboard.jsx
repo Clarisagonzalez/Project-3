@@ -1,9 +1,10 @@
-import { Container, Row, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { projects } from '../utils/dataArrays';
 import SingleProject from './SingleProject';
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_PROJECT, UPDATE_USER } from '../utils/mutations';
+import { MY_PROJECTS } from '../utils/queries';
 import Auth from '../utils/auth';
 
 export default function Dashboard() {
@@ -22,9 +23,21 @@ export default function Dashboard() {
   };
 
   const [formData, setFormData] = useState(initialState);
-  const [userData, setUserData] = useState(currentUser)
-  const [addProject] = useMutation(ADD_PROJECT);
+  const [userData, setUserData] = useState(currentUser);
+
+  const [addProject] = useMutation(ADD_PROJECT, {
+    refetchQueries: [
+      MY_PROJECTS,
+      'myProjects'
+    ]
+  });
   const [updateUser] = useMutation(UPDATE_USER);
+
+  const { data, loading } = useQuery(MY_PROJECTS);
+  
+  const myProjects = data?.projects || [];
+
+  if (loading) return (<div>Loading...</div>);
 
 
   const handleChange = (e) => {
@@ -49,14 +62,12 @@ export default function Dashboard() {
           userId: Auth.getProfile().data._id
         }
       });
-      projects.push(data);
-      setFormData(initialState);
+      setFormData(data);
     } catch (error) {
       throw error
     }
   };
 
-  let password;
 
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
@@ -80,8 +91,10 @@ export default function Dashboard() {
       <Container>
         <h2>See your campaigns/projects</h2>
         <Row>
-          {projects.map(project =>
-            (<SingleProject {...project} key={projects.indexOf(project)} />))}
+          {myProjects.map(project =>
+            ( <Col sm={12} md={6} lg={4} key={myProjects.indexOf(project)}>
+             <SingleProject {...project}  />
+             </Col>))}
         </Row>
       </Container>
 
@@ -89,7 +102,9 @@ export default function Dashboard() {
         <h2>Causes you have supported</h2>
         <Row>
           {projects.map(project =>
-            (<SingleProject {...project} key={projects.indexOf(project)} />))}
+            ( <Col sm={12} md={6} lg={4} key={projects.indexOf(project)}>
+              <SingleProject {...project}  />
+            </Col>))}
         </Row>
       </Container>
 
@@ -113,8 +128,7 @@ export default function Dashboard() {
           <Form.Group className="mb-3">
             <Form.Label>
               Update your password
-              <Form.Control type="password" name="password" id="password" value={userData.password} onChange={() => { 
-                handleUpdate(event)}}/>
+              <Form.Control type="password" name="password" id="password" value={userData.password} onChange={handleUpdate} />
             </Form.Label>
           </ Form.Group>
           <Button type="submit">Submit</Button>
