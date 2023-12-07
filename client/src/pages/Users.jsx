@@ -8,7 +8,6 @@ const Users = () => {
     const { data, loading } = useQuery(QUERY_ALL_USERS);
     const users = data?.users || [];
     if (loading) return (<div> Loading...</div>);
-
     return (
         <Container>
             <Row>
@@ -18,7 +17,7 @@ const Users = () => {
                         <Card.Header>
                             <Link to={`/users/${user._id}`}>{user.username}</Link>
                             <br/>
-                            <span> Contact <i>{user.username}</i>: <a href = {`mailto:${user.email}`}  target= '_blank' rel='noopener noreferrer'>{user.email}</a> </span>
+                            <span> Contact <i>{user.username}</i>{' '}: <a href = {`mailto:${user.email}`}  target= '_blank' rel='noopener noreferrer'>{user.email}</a> </span>
                         </Card.Header>
                         {user.projects.map((project) =>
                         (<Card.Body key={project._id}>

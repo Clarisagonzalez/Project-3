@@ -45,7 +45,6 @@ const projectSchema = new Schema(
         },
         userId: {
             type: Schema.Types.ObjectId, //The ID of the user who creates the project
-            required: true
         },
         comments: [commentSchema], 
         donations: [donationSchema]

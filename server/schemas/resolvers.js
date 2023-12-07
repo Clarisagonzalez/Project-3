@@ -6,7 +6,7 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const resolvers = {
     Query: {
         users: async () => {
-            return await User.find().populate('projects').lean({ getters: true, virtuals:true });
+            return await User.find().populate('projects');
         },
         user: async (parent, { _id }) => {
             return await User.findById(_id).populate('donations').populate('comments').populate('projects').lean({ getters: true, virtuals:true });
