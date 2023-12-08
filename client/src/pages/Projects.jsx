@@ -10,11 +10,9 @@ export default  function Projects() {
     const location = useLocation();
 
     useEffect(() => {
-        if(Auth.loggedIn()){
-            document.title = `${Auth.getProfile().data.username} is seeing all projects`
-        } else { document.title = 'You are seeing all projects.'}
+        if(Auth.loggedIn()) document.title = `Seeing all current projects!`
         return () => { 
-            if(location.pathname !== '/users') document.title = 'Unity Fund'
+            if(location.pathname !== '/projects') document.title = 'Unity Fund'
         }
     }, [])
     const { data, loading } = useQuery(QUERY_ALL_PROJECTS);
@@ -27,7 +25,7 @@ export default  function Projects() {
         <Container>
             <Row>
                {projects.map((project) => 
-               (<Col key={project._id}>
+               (<Col sm={12} md={6} key={project._id}>
                 <SingleProject {...project} />
                 </Col>))}
             </Row>

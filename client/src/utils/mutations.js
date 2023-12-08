@@ -54,6 +54,7 @@ mutation updateUser($username: String, $email: String, $password: String){
         username
         email
         _id
+        password
     }
 }`;
 /*

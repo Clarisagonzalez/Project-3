@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.jsx';
-import {Home} from './pages/Home';
+import Home from './pages/Home';
 import SingleProject from './pages/SingleProject';
 import NotFound from './pages/NotFound';
 import LoginForm from './pages/LoginForm';
@@ -13,6 +13,8 @@ import {Donation} from './pages/Donation';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import SingleUser from './pages/SingleUser';
+import UpdateUser from './pages/UpdateUser';
+import CreateProject from './pages/CreateProject';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +49,12 @@ const router = createBrowserRouter([
       },{
         path: '/users/:userId',
         element: <SingleUser />
+      },{
+        path: '/update',
+        element: <UpdateUser />
+      },{
+        path: '/create_project',
+        element: <CreateProject />
       }
     ]
   }

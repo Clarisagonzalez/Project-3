@@ -6,7 +6,7 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const resolvers = {
     Query: {
         users: async () => {
-            return await User.find().populate('projects');
+            return await User.find().populate('projects').lean({ getters: true, virtuals:true });
         },
         user: async (parent, { _id }) => {
             return await User.findById(_id).populate('donations').populate('comments').populate('projects').lean({ getters: true, virtuals:true });
@@ -19,7 +19,7 @@ const resolvers = {
         },
         myProjects: async (parent, args, context) => {
             if (context.user) {
-                const user =  await User.findOne({ _id: context.user._id}).populate('projects');
+                const user =  await User.findOne({ _id: context.user._id}).populate('projects').lean({ getters: true, virtuals: true });
                 const projects = user.projects || [];
                 return projects;
             } else {

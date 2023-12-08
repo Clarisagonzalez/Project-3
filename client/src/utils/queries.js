@@ -82,6 +82,10 @@ query allUsers {
         projects {
             projectName
             projectDescription
+            projectDate
+            expiresIn
+            goalAmount
+            userId
         }
     }
 }
