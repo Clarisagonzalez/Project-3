@@ -11,6 +11,8 @@ import SignUp from './pages/Sign-Up';
 import Projects from './pages/Projects';
 import {Donation} from './pages/Donation';
 import Dashboard from './pages/Dashboard';
+import Users from './pages/Users';
+import SingleUser from './pages/SingleUser';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,12 @@ const router = createBrowserRouter([
       }, {
         path: '/dashboard',
         element: <Dashboard />
+      },{
+        path: '/users',
+        element: <Users />
+      },{
+        path: '/users/:userId',
+        element: <SingleUser />
       }
     ]
   }

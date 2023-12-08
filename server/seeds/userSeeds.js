@@ -1,4 +1,4 @@
-const { Mongoose, Types, ObjectId } = require('mongoose');
+const { Mongoose, Types, ObjectId} = require('mongoose');
 
 const users = [
     {
@@ -6,14 +6,14 @@ const users = [
         email: 'test@testmail.com',
         password: '#password123',
         projects: [
-            Mongoose.Types.ObjectId("656f4e7626541c3e9e66993c")]
+            "656f4e7626541c3e9e66993c"]
     },
     {
         username: 'aRaquel11',
         email: 'test@gmail.com',
         password: '#password123',
         projects: [	
-            Mongoose.Types.ObjectId('656f4e7626541c3e9e66993a')
+           '656f4e7626541c3e9e66993a'
         ]
     },
     {
@@ -21,14 +21,14 @@ const users = [
         email: 'test@hotmail.com',
         password: '#password123',
         projects: [
-            Mongoose.Types.ObjectId("656f4e7626541c3e9e66993b")]
+            "656f4e7626541c3e9e66993b"]
     },
     {
         username: 'ivonneCruz13',
         email: 'test@yahoomail.com',
         password: '#password123',
         projects: [
-            new Mongoose.Types.ObjectId("656f4e7626541c3e9e66993d")]
+          "656f4e7626541c3e9e66993d"]
     }
 ];
 

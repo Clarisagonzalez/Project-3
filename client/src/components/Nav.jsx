@@ -7,7 +7,7 @@ const Nav = () => {
     <Container>
       <Row>
         <Col sm={12} md={6} lg={2}><li><Link to="/" style={{textDecoration: 'none'}}>Home</Link></li></Col>
-        <Col sm={12} md={6} lg={2}><li><Link to="/campaigns" style={{textDecoration: 'none'}}>Campaigns</Link></li></Col>
+        <Col sm={12} md={6} lg={2}><li><Link to="/users" style={{textDecoration: 'none'}}>Users</Link></li></Col>
         <Col sm={12} md={6} lg={2}><li><Link to="/projects"style={{textDecoration: 'none'}}>Projects</Link></li></Col>
         <Col sm={12} md={6} lg={2}><li><Link to="/about" style={{textDecoration: 'none'}}>Donate</Link></li></Col>
         {!Auth.loggedIn()?    
@@ -18,7 +18,7 @@ const Nav = () => {
         :
         (<>
         <Col sm={12} md={6} lg={2}><li><Link to="/dashboard" style={{textDecoration: 'none'}}>My Dashboard</Link></li></Col>
-        <Col sm={12} md={6} lg={2}><li><Link to="/logout" style={{textDecoration: 'none'}} onClick={() => Auth.logout()}>Log Out</Link></li></Col>
+        <Col sm={12} md={6} lg={2}><li><Link to="/" style={{textDecoration: 'none'}} onClick={() => Auth.logout()}>Log Out</Link></li></Col>
         </>)}
       </Row>
     </Container>

@@ -6,41 +6,40 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 const resolvers = {
     Query: {
         users: async () => {
-            return await User.find().populate('projects').lean({ getters: true, virtuals:true });
+            return await User.find().populate('projects');
         },
         user: async (parent, { _id }) => {
             return await User.findById(_id).populate('donations').populate('comments').populate('projects').lean({ getters: true, virtuals:true });
         },
         projects: async () => {
-            return await Project.find().populate('donations').populate('comments').lean({ getters: true, virtuals:true });
+            return await Project.find().lean({ getters: true, virtuals:true });
         },
         project: async (parent, { _id }) => {
             return await Project.findById(_id).populate('donations').populate('comments').lean({ getters: true, virtuals: true });
         },
-        me: async (parent, args, context) => {
+        myProjects: async (parent, args, context) => {
             if (context.user) {
-                return await User.findById(context.user._id).populate('donations').populate('comments').populate('projects').lean({ getters: true, virtuals:true });
-            }
-
+                const user =  await User.findOne({ _id: context.user._id}).populate('projects');
+                const projects = user.projects || [];
+                return projects;
+            } else {
             throw AuthenticationError;
+            };
         }
     },
 
     Mutation: {
+        //Done!
         addUser: async (parent, { username, email, password }) => {
             try {
-            const isUserNameTaken = await User.findOne({ username: username });
-            if (isUserNameTaken) throw AuthenticationError;
-
-            const isEmailTaken = await User.findOne({ email: email });
-
-            if (isEmailTaken) throw AuthenticationError;
-
             const user = await User.create({ username, email, password });
             const token = signToken(user);
             return { token, user };
-            } catch(err) { console.error(err)}
+            } catch(err) { 
+                console.error(err)
+            };
         },
+        //Done!
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
 
@@ -58,7 +57,7 @@ const resolvers = {
 
             return { token, user };
         },
-    
+    //Done!
    addProject: async (parent, { projectName, projectDescription, expiresIn, goalAmount }, context) => {
         if (context.user) {
             const newProject = await Project.create({ projectName: projectName, projectDescription: projectDescription, expiresIn: expiresIn, goalAmount: goalAmount, userId: context.user._id });
@@ -88,6 +87,7 @@ const resolvers = {
                 },
                 { new: true, runValidators: true});
     },
+    //Done!
     updateUser: async (parent, { username, email, password }, context) => {
         if (context.user) {
             return await User.findOneAndUpdate(
@@ -100,6 +100,18 @@ const resolvers = {
         }
         throw AuthenticationError;
     },
+    /*Could serve as example to implement Stripe
+        addOrder: async (parent, { products }, context) => {
+            if (context.user) {
+              const order = new Order({ products });
+      
+              await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+      
+              return order;
+            }
+      
+            throw AuthenticationError;
+          },*/
    /* makeDonation: async (parent, { projectId, amount }, context) => {
         if (context.user) {
             const newDonation = { projectId, amount };

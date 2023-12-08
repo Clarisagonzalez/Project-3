@@ -28,15 +28,6 @@ export const QUERY_ALL_PROJECTS = gql`
       projectDate
       expiresIn
       goalAmount
-      comments {
-        commentText,
-        commentAuthor
-        upvotes
-        reply
-      }
-      donations {
-        amount
-      }
     }
   }
 `;
@@ -71,12 +62,12 @@ query singleUser($_id: ID){
                 amount
             }
         }
-      }
+      
     }
   }
 `;
 
-export const QUERY_USERS = gql`
+export const QUERY_ALL_USERS = gql`
 query allUsers {
     users {
         _id
@@ -95,16 +86,19 @@ query allUsers {
     }
 }
 `
-export const ME =gql`
-query me{
-    _id: ID
-    username: String
-    email: String
-    donations: [Donation]!
-    comments: [Comment]!
-    projects: [Project]!
+export const MY_PROJECTS = gql`
+query myProjects {
+    projects {
+      _id
+      projectName
+      projectDescription
+      expiresIn
+      goalAmount
+      projectImage
+      userId
+  }
 }
 `;
-
+/*
 export const DONATION = gql`
-`;
+`;*/

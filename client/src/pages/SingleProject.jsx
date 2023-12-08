@@ -1,25 +1,25 @@
-import { Col, Card, } from 'react-bootstrap';
+import { Card, Image} from 'react-bootstrap';
 
 
-function SingleProject({ projectName, title="This Title", projectDate= '', projectDescription, links='http://github.io'}) {
+function SingleProject({ projectName, projectDate ='12/6/23.', goalAmount, expiresIn, userId, projectImage, projectDescription, links='http://github.io'}) {
 
     return (
-        <Col sm={12} md={6} lg={4} >
+        <>
             <Card >
                 <Card.Header>
-                    {projectName}
+                    {projectName} {goalAmount} {expiresIn}
                 </Card.Header>
-                <Card.Title>{title}</Card.Title>
+                <Card.Title>{userId}</Card.Title>
                 <Card.Subtitle> {projectDate}</Card.Subtitle>
                 <Card.Body>
+                <Image src={projectImage}/>
                   {projectDescription}
-                    <Card.Img src='/logo512.png'/>
                 </Card.Body>
                 <Card.Footer>
-                   <a href={links}>{links}</a>
+                   <a href={links}>Some Link</a>
                 </Card.Footer>
             </Card>
-        </Col>
+            </>
     );
 }
 

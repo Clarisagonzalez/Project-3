@@ -15,7 +15,7 @@ const projectSchema = new Schema(
             required: true,
             unique: true,
             minLength: 3,
-            maxLength: 12,
+            maxLength: 20,
         },
         projectDescription: {
             type: String,
@@ -23,10 +23,10 @@ const projectSchema = new Schema(
             minLength: 10,
             maxLength: 500
         },
-       /* projectImage: {
-            type: Blob,
-            required: false //?
-        },*/
+       projectImage: {
+            type: String,
+            required: false 
+        },
         projectDate: {
             type: Date,
             default: Date.now,
@@ -45,7 +45,6 @@ const projectSchema = new Schema(
         },
         userId: {
             type: Schema.Types.ObjectId, //The ID of the user who creates the project
-            required: true
         },
         comments: [commentSchema], 
         donations: [donationSchema]
