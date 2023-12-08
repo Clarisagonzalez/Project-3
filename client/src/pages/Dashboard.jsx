@@ -3,6 +3,7 @@ import { projects } from '../utils/dataArrays';
 import SingleProject from './SingleProject';
 import { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
+import { useLocation } from 'react-router-dom';
 import { ADD_PROJECT, UPDATE_USER, LOGIN} from '../utils/mutations';
 import { MY_PROJECTS } from '../utils/queries';
 import Auth from '../utils/auth';
@@ -22,6 +23,8 @@ export default function Dashboard() {
     password: ''
   };
 
+  const location = useLocation();
+
   useEffect(() => {
     document.title = `${Auth.getProfile().data.username} is in his dashboard!`
     return () => {
@@ -29,8 +32,10 @@ export default function Dashboard() {
     }
   }, [])
 
+  //Local state variables for the two forms that either create or update a DB resource
   const [formData, setFormData] = useState(initialState);
   const [userData, setUserData] = useState(currentUser);
+  //Local state variables that validate the input entered through the forms
   const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
