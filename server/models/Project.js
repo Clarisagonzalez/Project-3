@@ -1,56 +1,53 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const format_date = require('../utils/format_date');
+
+const  commentSchema  = require('./commentSchema');
+const  donationSchema  = require('./donationSchema');
+
 
 const mongooseLeanGetters = require('mongoose-lean-getters');
 const mongooseLeanVirtuals = require('mongoose-lean-virtuals');
 
-const projectSchema = Schema(
+const projectSchema = new Schema(
     {
         projectName: {
             type: String,
             required: true,
-            unique: true
-            //?
+            unique: true,
+            minLength: 3,
+            maxLength: 20,
         },
         projectDescription: {
             type: String,
             required: true,
-            //validation: length?
+            minLength: 10,
+            maxLength: 500
         },
-        projectImage: {
-            type: Blob,
-            required: false //?
-        },
-        projectVideo: {
-            //?
+       projectImage: {
+            type: String,
+            required: false 
         },
         projectDate: {
             type: Date,
-            default: Date.now(),
-            get: (timeStamp) => format_date(timeStamp)
+            default: Date.now,
+            get: function() {
+                return format_date(this.projectDate);
+            }
         },
-        projectExpiration: {
-            type: Number,
-            required: false,
-            //Validation: must be at a latter date: projectDate < projectExpiration
+        expiresIn: {
+            type: Number, // Number of days after the projectDate before the fundraiser is over.
+            required: false
         },
-        goal: {
+        goalAmount: {
             type: Number,
             required: true,
             //Decimal: 2 places
         },
-        comments: [commentSchema], //?
-        replies: [{
-            commentId: {
-                type: Schema.Types.ObjectId,
-                //
-            },
-            replyText: {
-                type: String,
-                //? length? Can only be made by the person in charge of the project
-            }
-        }],
-        donations: [donationSchema], //?
+        userId: {
+            type: Schema.Types.ObjectId, //The ID of the user who creates the project
+        },
+        comments: [commentSchema], 
+        donations: [donationSchema]
 
     },
     {
@@ -62,25 +59,34 @@ const projectSchema = Schema(
     }
 );
 
-projectSchema.virtuals('amountCollected').get(() => {
-    return; //total $ amount in donations so far
+projectSchema.virtual('amountCollected').get(function(){
+    return this.donations.reduce((total, current) => total + current, 0);
 });
-projectSchema.virtuals('amountToReachGoal').get(() => {
-    return; //goal - amountCollected if amountCollected <= goal
+projectSchema.virtual('amountToReachGoal').get(function() {
+    let amountCollected = this.donations.reduce((total, current) => total + current, 0);
+    if(this.goalAmount >= amountCollected){
+        return this.goalAmount - amountCollected;
+    } else {
+        return 0;
+    }
 })
 
 //If goal is reached or surpassed, show thank you message to the donors (maybe send email?)
 
-projectSchema.virtuals('numberOfDonations').get(() => this.donations.length);
+projectSchema.virtual('numberOfDonations').get(function() {
+    return this.donations.length}
+    );
 
-projectSchema.virtuals('numberOfComments').get(() => this.comments.length);
-
+projectSchema.virtual('numberOfComments').get(function() {
+    return this.comments.length}
+    );
+/*
 projectSchema.virtuals('countdownToExpiration').get(() => {
     return; //expirationDate - inceptionDate
-})
+})*/
 
 projectSchema.plugin(mongooseLeanGetters);
 projectSchema.plugin(mongooseLeanVirtuals);
+const Project = model('Project', projectSchema);
 
-module.exports = model('Project', projectSchema);
-
+module.exports =  Project;

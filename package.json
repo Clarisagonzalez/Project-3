@@ -8,27 +8,16 @@
         "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
         "install": "cd server && npm i && cd ../client && npm i",
         "build": "cd client && npm run build",
-        "render-build": "npm install && npm run build"
+        "render-build": "npm install && npm run build",
+        "seed": "cd server && node seeds/seed.js"
     },
-    "keywords": [
-        "MERN",
-        "GraphQL",
-        "Apollo",
-        "MongoDB",
-        "Mongoose",
-        "search-engine",
-        "React",
-        "Express",
-        "Node"
-    ],
+    "keywords": ["MERN", "GraphQL", "Apollo", "MongoDB", "Mongoose", "search-engine", "React", "Express", "Node"],
     "author": "Jonathan Maldonado Guemarez",
     "license": "MIT",
     "devDependencies": {
         "concurrently": "^5.1.0"
     },
     "dependencies": {
-        "express": "^4.18.2",
-        "express-graphql": "^0.12.0",
-        "graphql": "^15.8.0"
+        "stripe": "^14.7.0"
     }
 }

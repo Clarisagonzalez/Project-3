@@ -4,9 +4,9 @@ const mongooseLeanGetters = require('mongoose-lean-getters');
 
 const donationSchema = Schema(
     {   
-        donor: {
+        donorId: {
             type: Schema.Types.ObjectId,
-            ref: 'donor'
+            ref: 'User'
         },
         amount: {
             type: Number,
@@ -15,11 +15,9 @@ const donationSchema = Schema(
         },
         donationDate: {
             type: Date,
-            default: Date.now(),
+            default: Date.now,
             get: (timestamp) =>  format_date(timestamp)
         },
-        //donationType? Maybe in the Project model
-
 }, {
     toJSON: {
         getters: true,
