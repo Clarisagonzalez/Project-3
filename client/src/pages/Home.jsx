@@ -1,5 +1,14 @@
 import { Image, Carousel, Container } from 'react-bootstrap';
-export const Home = () => {
+import { useEffect } from 'react';
+
+const Home = () => {
+
+  useEffect(() => {
+    document.title = 'Welcome to Unity Fund!';
+    return () => {
+      if (location.pathname !== '/') document.title = 'Unity Fund'
+    }
+  }, [])
 
 
   return (
@@ -59,3 +68,4 @@ export const Home = () => {
   );
 }
 
+export default Home;
