@@ -1,7 +1,9 @@
 import { Card, Image} from 'react-bootstrap';
+import Auth from '../utils/auth';
+import AddComment from '../components/AddComment';
+import { Link } from 'react-router-dom';
 
-
-function SingleProject({ projectName, projectDate ='12/6/23.', goalAmount, expiresIn, userId, projectImage, projectDescription, links='http://github.io'}) {
+function SingleProject({_id, projectName, projectDate ='12/6/23.', goalAmount, expiresIn, userId, projectImage, projectDescription, links='http://github.io'}) {
 
     return (
         <>
@@ -22,6 +24,11 @@ function SingleProject({ projectName, projectDate ='12/6/23.', goalAmount, expir
                 <Card.Footer>
                    <a href={links}>Some Link</a>
                 </Card.Footer>
+                {Auth.loggedIn() && 
+                <>
+                <AddComment projectId = {_id}/>
+                <Link to={`/${_id}/comments`}>See all the available comments!</Link>
+                </>}
             </Card>
             </>
     );

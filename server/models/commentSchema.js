@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose');
 const mongooseLeanGetters = require('mongoose-lean-getters');
+const format_date = require('../utils/format_date');
 
 const commentSchema = Schema(
     {   
@@ -11,7 +12,7 @@ const commentSchema = Schema(
             type: String,
             required: true,
             trim: true,
-            minLength: 10,
+            minLength: 1,
             maxLenght: 280,
            
         },

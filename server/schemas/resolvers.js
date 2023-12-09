@@ -12,18 +12,18 @@ const resolvers = {
             return await User.findById(_id).populate('donations').populate('comments').populate('projects').lean({ getters: true, virtuals:true });
         },
         projects: async () => {
-            return await Project.find().lean({ getters: true, virtuals:true });
+            return await Project.find().populate('comments').populate('donations').lean({ getters: true, virtuals:true });
         },
         project: async (parent, { _id }) => {
             return await Project.findById(_id).populate('donations').populate('comments').lean({ getters: true, virtuals: true });
         },
         myProjects: async (parent, args, context) => {
-            if (context.user) {
-                const user =  await User.findOne({ _id: context.user._id}).populate('projects').lean({ getters: true, virtuals: true });
-                const projects = user.projects || [];
-                return projects;
-            } else {
-            throw AuthenticationError;
+            try{
+                const user =  await User.findById(context.user._id).populate('projects');
+                const myProjects = user?.projects || [];
+                return myProjects;
+            } catch(err) {
+            console.error('server/utils/resolvers.js', err);
             };
         }
     },
@@ -53,7 +53,7 @@ const resolvers = {
                 throw AuthenticationError;
             }
 
-            const token = signToken({ username: user.username, email: user.email, _id: user._id});
+            const token = signToken(user);
 
             return { token, user };
         },
@@ -75,14 +75,14 @@ const resolvers = {
         throw AuthenticationError;
     },
 
-    addComment: async (parent, { commentText }, context) => {
+    addComment: async (parent, { projectId, commentText }, context) => {
         if(!context.user)  throw AuthenticationError;
 
-        return await User.findOneAndUpdate(
-                { _id: context.user._id },
+        return await Project.findOneAndUpdate(
+                { _id: projectId },
                 {
                     $push: {
-                        comments: { commentText, commentAuthor: context.user._id}
+                        comments: { commentText}
                     }
                 },
                 { new: true, runValidators: true});

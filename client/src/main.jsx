@@ -9,7 +9,7 @@ import NotFound from './pages/NotFound';
 import LoginForm from './pages/LoginForm';
 import SignUp from './pages/Sign-Up';
 import Projects from './pages/Projects';
-import {Donation} from './pages/Donation';
+import Donations from './pages/Donations';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import SingleUser from './pages/SingleUser';
@@ -31,10 +31,7 @@ const router = createBrowserRouter([
       }, {
         path: '/signup',
         element: <SignUp />
-      }, {
-        path: '/donation',
-        element: <Donation />
-      }, {
+      },{
         path: '/projects',
         element: <Projects />
       }, {
@@ -55,6 +52,9 @@ const router = createBrowserRouter([
       },{
         path: '/create_project',
         element: <CreateProject />
+      },{
+        path: '/donations',
+        element: <Donations />
       }
     ]
   }

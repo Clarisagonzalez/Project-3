@@ -24,7 +24,7 @@ const typeDefs = `
     type Comment {
         _id: ID
         commentAuthor: String
-        commentText: String
+        commentText: String!
         commentDate: String
         upvotes: Int
         projectId: ID
@@ -33,7 +33,7 @@ const typeDefs = `
     type Donation {
         _id: ID
         donorId: ID
-        amount: Float
+        amount: Float!
         donationDate: String
     }
 
@@ -53,11 +53,14 @@ const typeDefs = `
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
+
         addProject(projectName: String!, projectDescription: String!, expiresIn: Int!, goalAmount: Float!, userId: ID!): User
-        addComment(commentText: String!): Comment
+        addComment(commentText: String!, projectId: ID!, commentAuthor: ID): Project
         upvoteComment(commentId: ID!,upvote: Boolean): Comment
         addReply(replyText: String!): Comment
+        
         makeDonation(projectId: ID!, amount: Float!) : Donation
+
         updateUser(username: String, email: String, password: String): User
           }
         `;

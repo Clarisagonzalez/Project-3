@@ -89,10 +89,10 @@ query allUsers {
         }
     }
 }
-`
+`;
 export const MY_PROJECTS = gql`
 query myProjects {
-    projects {
+    myProjects {
       _id
       projectName
       projectDescription
@@ -103,6 +103,3 @@ query myProjects {
   }
 }
 `;
-/*
-export const DONATION = gql`
-`;*/

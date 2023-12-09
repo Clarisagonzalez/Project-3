@@ -50,7 +50,7 @@ export default function UpdateUser() {
         }
       });
       setUserData(data.updateUser);
-      setShowAlert(true);
+      if(!error)setShowAlert(true);
     } catch (err) {
       setShowAlert(true);
       throw err;
