@@ -1,13 +1,23 @@
 import { Container, Col, Row, Card, Image } from 'react-bootstrap';
+import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_USERS } from '../utils/queries';
 import { Link } from 'react-router-dom';
+import Auth from '../utils/auth';
 
 const Users = () => {
+
+    useEffect(() => {
+        if(Auth.loggedIn()) document.title = `These are the resgistered users!`
+        return(() => { 
+            if(location.pathname !== '/users') document.title = 'Unity Fund'
+        });
+    }, [])
 
     const { data, loading } = useQuery(QUERY_ALL_USERS);
     const users = data?.users || [];
     if (loading) return (<div> Loading...</div>);
+  
     return (
         <Container>
             <Row>
@@ -17,15 +27,18 @@ const Users = () => {
                         <Card.Header>
                             <Link to={`/users/${user._id}`}>{user.username}</Link>
                             <br/>
-                            <span> Contact <i>{user.username}</i>{' '}: <a href = {`mailto:${user.email}`}  target= '_blank' rel='noopener noreferrer'>{user.email}</a> </span>
+                            <span> Contact <i>{user.username}</i>{' '} at : <a href = {`mailto:${user.email}`}  target= '_blank' rel='noopener noreferrer'>{user.email}</a> </span>
                         </Card.Header>
                         {user.projects.map((project) =>
-                        (<Card.Body key={project._id}>
+                        ( <Card.Body key={project._id}>
                             <Card.Title>
-                                {project.projectName}
+                                <h2>{project.projectName}</h2>
+                                <br/>
+                                {project.projectDescription}
                             </Card.Title>
                             <Card.Subtitle>
-                                {project.projectDescription}
+                            This project was proposed on {project.projectDate}<br/>
+                            {project.expiresIn} days left to raise funds!
                             </Card.Subtitle>
                         </Card.Body>
                         ))}

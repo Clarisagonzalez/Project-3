@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/auth';
@@ -6,6 +6,13 @@ import Auth from '../utils/auth';
 import { Button, Form, Alert } from 'react-bootstrap';
 
 const LoginForm = () => {
+  
+  useEffect(() => {
+    document.title = `If you are registered, go ahead and login!`
+    return () => {
+      if (location.pathname !== '/login') document.title = 'Unity Fund'
+    }
+  }, [])
   const initialState = {
     email: '',
     password: '',
@@ -50,9 +57,11 @@ const LoginForm = () => {
     <div>
       <h2>Login</h2>
       <Form noValidate validated={validated} className='bg-secondary text-center' onSubmit={handleSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+        { error && <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your login credentials!
-        </Alert>
+          <br/>
+          {error.message}
+        </Alert>}
         <Form.Group className="mb-3">
           <Form.Label htmlFor= 'email'>
             Email:
@@ -76,11 +85,6 @@ const LoginForm = () => {
           Login
         </Button>
       </Form>
-      {error && (
-        <div className="my-3 p-3 bg-danger text-white">
-          {error.message}
-        </div>
-      )}
     </div>
   );
 };

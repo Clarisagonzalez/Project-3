@@ -1,12 +1,20 @@
 import { Button, Form, Alert } from 'react-bootstrap';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const SignUp = () => {
+
+  useEffect(() => {
+    document.title = `Register to start a campaign/project!`
+    return () => {
+      if (location.pathname !== '/signup') document.title = 'Unity Fund'
+    }
+  }, [])
+
   const initialState = {
     username: '',
     email: '',

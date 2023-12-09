@@ -82,13 +82,17 @@ query allUsers {
         projects {
             projectName
             projectDescription
+            projectDate
+            expiresIn
+            goalAmount
+            userId
         }
     }
 }
-`
+`;
 export const MY_PROJECTS = gql`
 query myProjects {
-    projects {
+    myProjects {
       _id
       projectName
       projectDescription
@@ -99,6 +103,3 @@ query myProjects {
   }
 }
 `;
-/*
-export const DONATION = gql`
-`;*/
