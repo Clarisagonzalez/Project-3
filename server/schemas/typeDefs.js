@@ -48,17 +48,18 @@ const typeDefs = `
         projects: [Project]
         project(_id: ID!): Project
         myProjects: [Project]
+        commentsPerProject(projectId: ID!): [Comment]
+
         }
 
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
 
-        addProject(projectName: String!, projectDescription: String!, expiresIn: Int!, goalAmount: Float!, userId: ID!): User
+        addProject(projectName: String!, projectDescription: String!, expiresIn: Int!, goalAmount: Float!, userId: ID): User
         addComment(commentText: String!, projectId: ID!, commentAuthor: ID): Project
         upvoteComment(commentId: ID!,upvote: Boolean): Comment
         addReply(replyText: String!): Comment
-        
         makeDonation(projectId: ID!, amount: Float!) : Donation
 
         updateUser(username: String, email: String, password: String): User

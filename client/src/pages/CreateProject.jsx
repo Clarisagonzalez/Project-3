@@ -1,4 +1,4 @@
-import { Container, Row, Button, Form, Alert } from 'react-bootstrap';
+import { Container, Row, Button, Form } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_PROJECT } from '../utils/mutations';
@@ -22,9 +22,6 @@ export default function CreateProject() {
   };
 
   const [formData, setFormData] = useState(initialState);
-  //Local state variables that validate the input entered through the forms
-  const [validated, setValidated] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
 
   const [addProject, { projectError }] = useMutation(ADD_PROJECT);
 
@@ -35,14 +32,6 @@ export default function CreateProject() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    };
-    setValidated(true);
-
     try {
       const { data } = await addProject({
         variables: {
@@ -55,7 +44,6 @@ export default function CreateProject() {
       });
       setFormData(data);
     } catch (error) {
-      setShowAlert(true);
       throw error;
     }
   };
@@ -65,12 +53,7 @@ export default function CreateProject() {
 <Row>
   <div>
     <h2>Add Project</h2>
-    <Form noValidate validated={validated} className="align-center bg-secondary text-center" onSubmit={handleSubmit}>
-      {projectError && (<Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-        Something went wrong with your login credentials!
-        <br />
-        {projectError.message}
-      </Alert>)}
+    <Form  className="align-center bg-secondary text-center" onSubmit={handleSubmit}>
       <Form.Group className="mb-3">
         <Form.Label htmlFor='projectName'>
           Enter a name for your campaign/project:
