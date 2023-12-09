@@ -80,6 +80,7 @@ query allUsers {
             commentText
         }
         projects {
+          _id
             projectName
             projectDescription
             projectDate
@@ -103,3 +104,13 @@ query myProjects {
   }
 }
 `;
+
+export const COMMENTS_PER_PROJECT = gql`
+query commentsPerProject($projectId: ID!) {
+    commentsPerProject(projectId: $projectId) {
+      _id
+      commentText
+      commentDate
+      commentAuthor
+    }
+}`

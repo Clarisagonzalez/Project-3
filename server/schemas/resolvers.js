@@ -17,6 +17,10 @@ const resolvers = {
         project: async (parent, { _id }) => {
             return await Project.findById(_id).populate('donations').populate('comments').lean({ getters: true, virtuals: true });
         },
+        commentsPerProject: async (parent, { projectId }) => {
+            const project = await Project.findById(projectId).populate('comments');
+            return project.comments;
+        },
         myProjects: async (parent, args, context) => {
             try{
                 const user =  await User.findById(context.user._id).populate('projects');

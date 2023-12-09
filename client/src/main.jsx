@@ -15,6 +15,7 @@ import Users from './pages/Users';
 import SingleUser from './pages/SingleUser';
 import UpdateUser from './pages/UpdateUser';
 import CreateProject from './pages/CreateProject';
+import Comments from './pages/CommentsPerProject';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,9 @@ const router = createBrowserRouter([
       },{
         path: '/donations',
         element: <Donations />
+      },{
+        path: '/:id/comments',
+        element: <Comments />
       }
     ]
   }
