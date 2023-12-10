@@ -16,24 +16,24 @@ const Home = () => {
       <Carousel style={{ maxWidth: '50vw', margin: 'auto'}}>
         <Carousel.Item>
         <div className="d-flex justify-content-center">
-          <Image src="/images/Donation.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
-          <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
+          <Image src="/images/Donation.jpg" className='mx-auto' style={{ height: '40vh', width: 'auto' }} />
+          <Carousel.Caption style={{ textAlign: 'center' }} className='text-light'>
             <p>"Small Acts, Big Impact".</p>
           </Carousel.Caption>
           </div>
         </Carousel.Item>
         <Carousel.Item className=' max-vh-10'>
         <div className="d-flex justify-content-center">
-          <Image src="/images/Planning-a-Charity-Event.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
-          <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
+          <Image src="/images/Planning-a-Charity-Event.jpg" className='mx-auto' style={{ height: '40vh', width: 'auto' }} />
+          <Carousel.Caption style={{ textAlign: 'center' }} className='text-light'>
             <p>"Inspire Giving, Ignite Progress".</p>
           </Carousel.Caption>
           </div>
         </Carousel.Item>
         <Carousel.Item className=' max-vh-10'>
         <div className="d-flex justify-content-center">
-          <Image src="/images/plantatree.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
-          <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
+          <Image src="/images/plantatree.jpg" className='mx-auto' style={{ height: '40vh', width: 'auto' }} />
+          <Carousel.Caption style={{ textAlign: 'center' }} className='text-light'>
             
             <p>
             "Donate Today, Shape Tomorrow".
@@ -43,8 +43,8 @@ const Home = () => {
         </Carousel.Item>
         <Carousel.Item >
         <div className="d-flex justify-content-center">
-          <Image src="/images/womenmarch.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
-          <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
+          <Image src="/images/womenmarch.jpg" className='mx-auto' style={{ height: '40vh', width: 'auto' }} />
+          <Carousel.Caption style={{ textAlign: 'center' }} className='text-light'>
             
             <p>
             "Transforming Lives Together".
@@ -54,8 +54,8 @@ const Home = () => {
         </Carousel.Item>
         <Carousel.Item className=' max-vh-10'>
         <div className="d-flex justify-content-center">
-          <Image src="/images/artcampaign.jpg" className='text-center' style={{ height: '50vh', width: 'auto'}} />
-          <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
+          <Image src="/images/artcampaign.jpg" className='text-center' style={{ height: '40vh', width: 'auto'}} />
+          <Carousel.Caption style={{ textAlign: 'center' }} className='text-light'>
             
             <p>
             "Building Hope, Sparking Change".

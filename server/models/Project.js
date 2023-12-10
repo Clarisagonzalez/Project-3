@@ -71,7 +71,6 @@ projectSchema.virtual('amountToReachGoal').get(function() {
     }
 })
 
-//If goal is reached or surpassed, show thank you message to the donors (maybe send email?)
 
 projectSchema.virtual('numberOfDonations').get(function() {
     return this.donations.length}
@@ -80,10 +79,6 @@ projectSchema.virtual('numberOfDonations').get(function() {
 projectSchema.virtual('numberOfComments').get(function() {
     return this.comments.length}
     );
-/*
-projectSchema.virtuals('countdownToExpiration').get(() => {
-    return; //expirationDate - inceptionDate
-})*/
 
 projectSchema.plugin(mongooseLeanGetters);
 projectSchema.plugin(mongooseLeanVirtuals);
