@@ -18,8 +18,7 @@ const Home = () => {
         <div className="d-flex justify-content-center">
           <Image src="/images/Donation.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <p>"Small Acts, Big Impact".</p>
           </Carousel.Caption>
           </div>
         </Carousel.Item>
@@ -27,8 +26,7 @@ const Home = () => {
         <div className="d-flex justify-content-center">
           <Image src="/images/Planning-a-Charity-Event.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p>"Inspire Giving, Ignite Progress".</p>
           </Carousel.Caption>
           </div>
         </Carousel.Item>
@@ -36,31 +34,31 @@ const Home = () => {
         <div className="d-flex justify-content-center">
           <Image src="/images/plantatree.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
-            <h3>Third slide label</h3>
+            
             <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            "Donate Today, Shape Tomorrow".
             </p>
           </Carousel.Caption>
           </div>
         </Carousel.Item>
         <Carousel.Item >
         <div className="d-flex justify-content-center">
-          <Image src="/logo512.png" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
+          <Image src="/images/womenmarch.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
-            <h3>Fourth slide label</h3>
+            
             <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            "Transforming Lives Together".
             </p>
           </Carousel.Caption>
           </div>
         </Carousel.Item>
         <Carousel.Item className=' max-vh-10'>
         <div className="d-flex justify-content-center">
-          <Image src="/logo512.png" className='text-center' style={{ height: '50vh', width: 'auto'}} />
+          <Image src="/images/artcampaign.jpg" className='text-center' style={{ height: '50vh', width: 'auto'}} />
           <Carousel.Caption style={{ textAlign: 'center' }} className='text-info'>
-            <h3>Fifth slide label</h3>
+            
             <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            "Building Hope, Sparking Change".
             </p>
           </Carousel.Caption>
           </div>
