@@ -26,7 +26,8 @@ const commentSchema = Schema(
             default: 0
         },
         projectId: {
-            type: Schema.Types.ObjectId // The project being commented on by the user
+            type: Schema.Types.ObjectId, // The project being commented on by the user
+            ref: 'Project'
         }
 
 }, {

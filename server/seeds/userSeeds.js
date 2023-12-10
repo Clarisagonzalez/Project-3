@@ -1,4 +1,3 @@
-const { Mongoose, Types, ObjectId} = require('mongoose');
 
 const users = [
     {
@@ -6,14 +5,26 @@ const users = [
         email: 'test@testmail.com',
         password: '#password123',
         projects: [
-            "656f4e7626541c3e9e66993c"]
+        ],
+        donations: [
+
+        ],
+        comments: [
+
+        ]
     },
     {
         username: 'aRaquel11',
         email: 'test@gmail.com',
         password: '#password123',
-        projects: [	
-           '656f4e7626541c3e9e66993a'
+        projects: [
+
+        ],
+        donations: [
+
+        ],
+        comments: [
+
         ]
     },
     {
@@ -21,14 +32,26 @@ const users = [
         email: 'test@hotmail.com',
         password: '#password123',
         projects: [
-            "656f4e7626541c3e9e66993b"]
+        ],
+        donations: [
+
+        ],
+        comments: [
+
+        ]
     },
     {
         username: 'ivonneCruz13',
         email: 'test@yahoomail.com',
         password: '#password123',
         projects: [
-          "656f4e7626541c3e9e66993d"]
+        ],
+        donations: [
+
+        ],
+        comments: [
+
+        ]
     }
 ];
 
