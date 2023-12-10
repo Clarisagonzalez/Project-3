@@ -26,19 +26,9 @@ const commentSchema = Schema(
             default: 0
         },
         projectId: {
-            type: Schema.Types.ObjectId // The project being commented on by the user
-        },
-        reply: [
-            {
-                replyText: {
-                    type: String,
-                    minLength: 10,
-                    maxLength: 280
-                }
-            },
-               { fundraiserId: Schema.Types.ObjectId }//The _id of the person who is fundraising for the cause.
-        
-        ]
+            type: Schema.Types.ObjectId, // The project being commented on by the user
+            ref: 'Project'
+        }
 
 }, {
     toJSON: {

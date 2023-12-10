@@ -18,6 +18,10 @@ const donationSchema = Schema(
             default: Date.now,
             get: (timestamp) =>  format_date(timestamp)
         },
+        projectId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Project'
+        }
 }, {
     toJSON: {
         getters: true,
