@@ -23,7 +23,7 @@ const Header = () => {
       <img src="/logo.png" alt="Logo" style={styles.logo} />
       <Row>
         <Col sm={12} md={3} ><li><Link to="/about">About Us</Link></li></Col>
-        <Col sm={12} md={3} ><li><Link to="/">How to start donating</Link></li></Col>
+        <Col sm={12} md={3} ><li><Link to="/howtodonate">How to start donating</Link></li></Col>
         <Col sm={12} md={3} ><li><Link to="/campaigns">How to set up a campaign</Link></li></Col>
       </Row>
     </Container>
