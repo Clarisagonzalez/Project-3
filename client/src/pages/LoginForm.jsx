@@ -55,7 +55,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2 style={{ textAlign: 'center', fontFamily:'Nunito, sans-serif'}}>Login</h2>
       <Form noValidate validated={validated} className='bg-secondary text-center' onSubmit={handleSubmit}>
         { error && <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your login credentials!

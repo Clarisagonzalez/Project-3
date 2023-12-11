@@ -11,10 +11,26 @@
         "render-build": "npm install && npm run build",
         "seed": "cd server && node seeds/seed.js"
     },
-    "keywords": ["MERN", "GraphQL", "Apollo", "MongoDB", "Mongoose", "search-engine", "React", "Express", "Node"],
+    "keywords": [
+        "MERN",
+        "GraphQL",
+        "Apollo",
+        "MongoDB",
+        "Mongoose",
+        "search-engine",
+        "React",
+        "Express",
+        "Node"
+    ],
     "author": "Jonathan Maldonado Guemarez",
     "license": "MIT",
     "devDependencies": {
         "concurrently": "^5.1.0"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.2",
+        "react-bootstrap": "^2.9.1",
+        "react-router-dom": "^6.20.1",
+        "stripe": "^14.7.0"
     }
 }
