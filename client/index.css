@@ -1,6 +1,27 @@
-
-
 body {
     font-family: 'Nunito', sans-serif;
+    
   }
 
+  .about-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+  .about-content {
+    font-size: 18px;
+    padding: 70px;
+    line-height: 35px;
+  }
+  
+  .mission-header {
+    padding: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  .mission-content {
+    padding: 70px;
+    font-size: 18px;
+    line-height: 35px;
+  }
