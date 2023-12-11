@@ -1,0 +1,105 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #130f40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(45deg, #41295a, #2f0743);
+}
+
+.form-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    margin: 20px;
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+}
+
+.form-container h1 {
+    color: #130f40;
+    font-weight: 300;
+    margin-bottom: 24px;
+}
+
+.form-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.btn-login {
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #4cd137;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #44bd32;
+    transform: translateY(-3px);
+}
+
+.form-container p {
+    color: #333;
+    font-size: 14px;
+    margin-top: 16px;
+}
+
+.link-signup {
+    color: #4cd137;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.link-signup:hover {
+    color: #44bd32;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+/* ... other styles ... */
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.form-box input {
+    width: calc(100% - 30px); /* Adjust width to account for padding */
+    padding: 15px;
+    margin: 0 auto; /* Auto margins for horizontal centering */
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+/* ... other styles ... */
