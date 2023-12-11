@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import  NavBar  from './components/Nav';
 import Footer from './components/Footer';
 import Header from './components/Header';
+
 import {
   ApolloClient,
   InMemoryCache,

@@ -11,7 +11,7 @@ const Nav = () => {
           <li><Link to="/" style={{textDecoration: 'none'}}>Home</Link></li></Col>
         <Col sm={12} md={6} lg={3}><li><Link to="/users" style={{textDecoration: 'none'}}>Users</Link></li></Col>
         <Col sm={12} md={6} lg={3}><li><Link to="/projects"style={{textDecoration: 'none'}}>Projects</Link></li></Col>
-        <Col sm={12} md={6} lg={3}><li><Link to="/about" style={{textDecoration: 'none'}}>Donate</Link></li></Col>
+        <Col sm={12} md={6} lg={3}><li><Link to="/donate" style={{textDecoration: 'none'}}>Donate</Link></li></Col>
         {!Auth.loggedIn()?    
         (<>
         <Col sm={12} md={6} lg={3}><li><Link to="/login" style={{textDecoration: 'none'}}>Log In</Link></li></Col>

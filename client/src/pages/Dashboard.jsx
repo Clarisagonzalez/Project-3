@@ -1,5 +1,4 @@
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { projects } from '../utils/dataArrays';
 import SingleProject from './SingleProject';
 import { useEffect } from 'react';
 import { useQuery} from '@apollo/client';
@@ -35,10 +34,10 @@ export default function Dashboard() {
         <Container>
         <h2>See your campaigns/projects</h2>
         <Row>
-          {myProjects.map(project =>
+          {!myProjects.length ? (<div> You haven't proposed any project yet. Please press the appropriate button to do so.</div>) : (myProjects.map(project =>
           (<Col sm={12} md={6} lg={4} key={project._id}>
             <SingleProject {...project} />
-          </Col>))}
+          </Col>)))}
         </Row>
       </Container>}
       <Container>
