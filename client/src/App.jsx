@@ -1,22 +1,11 @@
 import React from 'react';
-import { ApolloProvider } from '@apollo/client';
-import { Routes, Route } from 'react-router-dom'; 
-import { ApolloClient, InMemoryCache, createHttpLink,} from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink,} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import  NavBar  from './components/Nav';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import AboutUs from './components/AboutUs';
-import {Home} from './pages/Home';
-import LoginForm from './pages/LoginForm';
-import SignUp from './pages/Sign-Up';
-import Projects from './pages/Projects';
-import {Donations} from './pages/Donations';
-import Dashboard from './pages/Dashboard';
-import Users from './pages/Users';
-import SingleUser from './pages/SingleUser';
-
+import { Outlet } from 'react-router-dom';
 
 
 const httpLink = createHttpLink({
@@ -43,18 +32,7 @@ function App() {
     <ApolloProvider client={client}>
        <Header />
        <NavBar />
-       <Routes>
-         <Route path="/about" element={<AboutUs />} />
-         <Route path="/" element={<Home />} />
-         <Route path="/login" element={<LoginForm />} />
-         <Route path="/signup" element={<SignUp />} />
-         <Route path="/donation" element={<Donations />} />
-         <Route path="/projects" element={<Projects />} />
-         <Route path="/dashboard" element={<Dashboard />} />
-         <Route path="/users/:userId" element={<SingleUser />} />
-         <Route path="/users" element={<Users />} />
-
-       </Routes>
+      <Outlet/>
        <Footer />
     </ApolloProvider>
   );
