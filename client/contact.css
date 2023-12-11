@@ -1,0 +1,69 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background: #005f73;
+    color: white;
+    padding: 1em 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .menu a, .login, .signup {
+    color: white;
+    text-decoration: none;
+    margin: 0 1em;
+}
+
+.login, .signup {
+    background: #ee6c4d;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+
+.intro {
+    text-align: center;
+    padding: 2em;
+    background: #e0fbfc;
+}
+
+.intro .btn {
+    background: #3d5a80;
+    color: white;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0.5em;
+}
+
+.team {
+    padding: 2em;
+}
+
+.team-members {
+    display: flex;
+    justify-content: space-around;
+}
+
+footer {
+    background: #293241;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 2em;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.social-media a:not(:last-child) {
+    margin-right: 1em;
+}
