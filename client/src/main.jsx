@@ -13,6 +13,7 @@ import {Donation} from './pages/Donation';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import SingleUser from './pages/SingleUser';
+import AboutUs from './components/AboutUs.jsx';
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,10 @@ const router = createBrowserRouter([
       },{
         path: '/users/:userId',
         element: <SingleUser />
-      }
+      },{
+        path: '/about',
+        element: <AboutUs />
+      },
     ]
   }
 ]);

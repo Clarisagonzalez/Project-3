@@ -51,7 +51,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <h2>Sign Up</h2>
+      <h2 style={{ textAlign: 'center', fontFamily:'Nunito, sans-serif'}} >Sign Up</h2>
       <Form noValidate validated={validated} className="align-center bg-secondary text-center" onSubmit={handleSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your signup!
