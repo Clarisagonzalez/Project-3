@@ -11,6 +11,16 @@ db.once('open', async () => {
 
     await cleanDB('User', 'users');
     await User.create(users);
+    for(let i = 0; i < projects.length; i++){
+      users[i].projects.push(projects[3-i]._id);
+      donations[i].donorId = users[i]._id;
+      donations[i].projectId = projects[i]._id;
+      users[i].donations.push(donations[i]);
+      users[i].comments.push(comments[i]);
+      projects[i].donations.push(donations[i]);
+      projects[i].comments.push(comments[i]);
+    }
+  
     console.log('all done!');
     process.exit(0);
 

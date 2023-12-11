@@ -12,7 +12,7 @@ import {Home} from './pages/Home';
 import LoginForm from './pages/LoginForm';
 import SignUp from './pages/Sign-Up';
 import Projects from './pages/Projects';
-import {Donation} from './pages/Donation';
+import {Donations} from './pages/Donations';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import SingleUser from './pages/SingleUser';
@@ -48,7 +48,7 @@ function App() {
          <Route path="/" element={<Home />} />
          <Route path="/login" element={<LoginForm />} />
          <Route path="/signup" element={<SignUp />} />
-         <Route path="/donation" element={<Donation />} />
+         <Route path="/donation" element={<Donations />} />
          <Route path="/projects" element={<Projects />} />
          <Route path="/dashboard" element={<Dashboard />} />
          <Route path="/users/:userId" element={<SingleUser />} />

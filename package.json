@@ -1,5 +1,5 @@
 {
-    "name": "book-search-engine",
+    "name": "unity-fund",
     "version": "1.0.0",
     "description": "A full stack application using the MERN stack together with GraphQL in order to allow authenticated users to search info about projects, propose new projects, and make donations to them.",
     "main": "server/server.js",
