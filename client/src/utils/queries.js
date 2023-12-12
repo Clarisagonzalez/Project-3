@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_SINGLE_PROJECT = gql`
-  query singleProject($_id: ID) {
+  query singleProject($_id: ID!) {
     project(_id: $_id) {
       _id
       projectName
@@ -9,12 +9,7 @@ export const QUERY_SINGLE_PROJECT = gql`
       projectDate
       expiresIn
       goalAmount
-      comments {
-        commentText
-      }
-      donations {
-        amount
-      }
+      userId
     }
   }
 `;
@@ -91,19 +86,39 @@ query allUsers {
     }
 }
 `;
-export const MY_PROJECTS = gql`
-query myProjects {
-    myProjects {
+export const ME = gql`
+query me($_id: ID!) {
+    me(_id: $_id) {
+      _id
+      username
+      email
+      projects{
       _id
       projectName
       projectDescription
       expiresIn
       goalAmount
-      projectImage
       userId
+      }
+      donations{
+        amount
+        projectId
+        donorId
+        donationDate
+      }
   }
 }
 `;
+
+export const ALL_MY_COMMENTS = gql`
+query allMyComments($_id: ID!){
+  allMyComments(_id: $_id){
+    comment{
+      commentText
+    }
+    projectName
+  }
+}`;
 
 export const COMMENTS_PER_PROJECT = gql`
 query commentsPerProject($projectId: ID!) {
@@ -113,4 +128,4 @@ query commentsPerProject($projectId: ID!) {
       commentDate
       commentAuthor
     }
-}`
+}`;

@@ -1,10 +1,11 @@
 import { Card, Image} from 'react-bootstrap';
 import Auth from '../utils/auth';
 import AddComment from '../components/AddComment';
+import MakeDonation from '../components/MakeDonation';
 import { Link } from 'react-router-dom';
 
-function SingleProject({_id, projectName, projectDate ='12/6/23.', goalAmount, expiresIn, userId, projectImage, projectDescription, links='http://github.io'}) {
-
+function SingleProject({ projectName, goalAmount, expiresIn, projectDate, projectDescription, _id , userId}) {
+ 
     return (
         <>
             <Card >
@@ -13,20 +14,20 @@ function SingleProject({_id, projectName, projectDate ='12/6/23.', goalAmount, e
                     We need your help to raise ${goalAmount}!<br/>
                     Hurry! This campaign expires in {expiresIn} days!
                 </Card.Header>
-                <Card.Title>{userId}</Card.Title>
-                <Card.Subtitle> This project was submitted on {projectDate}</Card.Subtitle>
+                <Card.Title> This project was submitted on {projectDate}</Card.Title>
+                <Card.Subtitle>User: {userId}</Card.Subtitle>
                 <hr/>
                 <Card.Body>
-                <Image src={projectImage}/>
                 <h6>Description</h6>
                   {projectDescription}
                 </Card.Body>
                 <Card.Footer>
-                   <a href={links}>Some Link</a>
+                   <a href=''>Some Link</a>
                 </Card.Footer>
                 {Auth.loggedIn() && 
                 <>
                 <AddComment projectId = {_id}/>
+                <MakeDonation projectId = {_id}/>
                 <Link to={`/${_id}/comments`}>See all the available comments!</Link>
                 </>}
             </Card>

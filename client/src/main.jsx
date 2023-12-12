@@ -19,6 +19,7 @@ import Comments from './pages/CommentsPerProject';
 import AboutUs from './components/AboutUs.jsx';
 import HowToDonate from './components/HowToDonate.jsx';
 import HowToCampaign from './components/HowToCampaign.jsx';
+import MyComments from './pages/Comments';
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,9 @@ const router = createBrowserRouter([
       },{
         path: '/howtocampaign',
         element: <HowToCampaign/>
+      },{
+        path: '/comments',
+        element: <MyComments />
       }
     ]
   }

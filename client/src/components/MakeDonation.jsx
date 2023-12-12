@@ -1,32 +1,31 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Container, Alert, Form, InputGroup, Button } from 'react-bootstrap';
-import { ADD_COMMENT } from '../utils/mutations';
+import { MAKE_DONATION } from '../utils/mutations';
 import Auth from '../utils/auth';
 
-export default function AddComment({ projectId }) {
+export default function MakeDonation({ projectId }) {
 
-    const [commentText, setCommentText] = useState('');
+    const [donatedAmount, setDonatedAmount] = useState(0);
 
-    const [addComment, { error }] = useMutation(ADD_COMMENT)
+    const [makeDonation, { error }] = useMutation(MAKE_DONATION);
     const [showAlert, setShowAlert] = useState(false);
 
 
     const handleChange = (e) => {
-        setCommentText(e.target.value);
+        setDonatedAmount(parseInt(e.target.value));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-
-            const { data } = await addComment({
-                variables: { projectId: projectId, commentText: commentText, commentAuthor: Auth.getProfile().data._id }
+            const { data } = await makeDonation({
+                variables: { projectId, amount: donatedAmount, donorId: Auth.getProfile().data._id}
             });
-            setShowAlert(true);
-            setCommentText('');
+            console.log(data.makeDonation);
+            setDonatedAmount(0);
         } catch (err) {
+            setShowAlert(true);
 
             throw err;
         }
@@ -41,12 +40,12 @@ export default function AddComment({ projectId }) {
                     {error.message}
                 </Alert>}
                 <InputGroup>
-                    <InputGroup.Text>Leave your thoughts about this campaign/project!</InputGroup.Text>
-                    <Form.Control as="textarea" onChange={handleChange} />
+                    <InputGroup.Text>Enter the amount you want to donate in $USD</InputGroup.Text>
+                    <Form.Control type="text" onChange={handleChange} />
                 </InputGroup>
-                <Button variant='primary' type='submit'>Add Comment!</Button>
+                <Button variant='primary' type='submit'>Please Donate</Button>
                 <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='success'>
-                    {`${Auth.getProfile().data.username} successfully commented on this project.`}
+                    {`${Auth.getProfile().data.username} successfully donated!`}
                 </Alert>
             </Form>
         </Container>

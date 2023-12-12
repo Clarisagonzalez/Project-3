@@ -18,7 +18,6 @@ export default  function Projects() {
     const { data, loading } = useQuery(QUERY_ALL_PROJECTS);
 
     const projects = data?.projects || [];
-
     if(loading) return(<div>Loadin...</div>);
 
     return (

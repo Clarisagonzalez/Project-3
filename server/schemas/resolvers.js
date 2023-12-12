@@ -1,4 +1,5 @@
 const { User, Project } = require('../models');
+const bcrypt = require('bcrypt');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -14,21 +15,41 @@ const resolvers = {
         projects: async () => {
             return await Project.find().populate('comments').populate('donations').lean({ getters: true, virtuals: true });
         },
-        project: async (parent, { _id }) => {
-            return await Project.findById(_id).populate('donations').populate('comments').lean({ getters: true, virtuals: true });
+        singleProject: async (parent, { _id }) => {
+            return await Project.findById(_id).lean();
         },
         commentsPerProject: async (parent, { projectId }) => {
             const project = await Project.findById(projectId).populate('comments');
             return project.comments;
         },
-        myProjects: async (parent, args, context) => {
+        me: async (parent, { _id }) => {
             try {
-                const user = await User.findById(context.user._id).populate('projects');
-                const myProjects = user?.projects || [];
-                return myProjects;
+                return await User.findById(_id).populate('projects').populate('comments').populate('donations');
+                
             } catch (err) {
                 console.error('server/utils/resolvers.js', err);
             };
+        },
+        allMyComments: async (parent, { _id }) => {
+            try{
+                const me = User.findById(_id).populate('comments');
+                const myComments = me;
+                const projectIds = myComments.map((comment) => comment.projectId);
+                const projectNames = [];
+                for(let i=0; i < myComments.length; i++){
+                    const project= await Project.findById(projectIds[i]);
+                    const projectName= project.projectName;
+                    projectNames.push(projectName);
+                };
+                const commentedProjects = [];
+                for(let i = 0; i < myComments.length; i++){
+                    const commentedProject = { comment: myComments[i], projectName: projectNames[i] };
+                    commentedProjects(commentedProject);
+                };
+                return commentedProjects;
+            } catch(err) {
+                throw err;
+            }
         }
     },
 
@@ -75,60 +96,73 @@ const resolvers = {
             }
             throw AuthenticationError;
         },
-        addComment: async (parent, { projectId, commentText }, context) => {
-            if (!context.user) throw AuthenticationError;
-
-            return await Project.findOneAndUpdate(
-                { _id: projectId },
-                {
-                    $push: {
-                        comments: { commentText }
-                    }
-                },
-                { new: true, runValidators: true });
+        addComment: async (parent, { projectId, commentText, commentAuthor }) => {
+            try {
+                
+                const newComment= { projectId, commentText, commentAuthor };
+                await User.findOneAndUpdate(
+                    { _id: commentAuthor },
+                    {
+                        $push: {
+                            comments: newComment
+                        }
+                    },
+                    { new: true, runValidators: true }
+                );
+                return await Project.findOneAndUpdate(
+                    { _id: projectId },
+                    {
+                        $push: {
+                            comments: newComment
+                        }
+                    },
+                    { new: true });
+            } catch (err) {
+                throw err;
+            }
         },
         updateUser: async (parent, { username, email, password }, context) => {
             if (context.user) {
+                let newPassword;
+                if(password){
+
+                newPassword= bcrypt.hash(password, 10)
+                };
                 return await User.findOneAndUpdate(
                     { _id: context.user._id },
                     {
                         username: username || context.user.username,
                         email: email || context.user.email,
-                        password: password || context.user.password
+                        password: newPassword || context.user.password
                     },
                     { new: true, runValidators: true }
                 );
             }
             throw AuthenticationError;
         },
-        /*Could serve as example to implement Stripe
-            addOrder: async (parent, { products }, context) => {
-                if (context.user) {
-                  const order = new Order({ products });
-          
-                  await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-          
-                  return order;
-                }
-          
-                throw AuthenticationError;
-              },*/
-        /* makeDonation: async (parent, { projectId, amount }, context) => {
-             if (context.user) {
-                 const newDonation = { projectId, amount };
-                 const updatedUser = await User.findOneAndUpdate(
-                     { _id: context.user._id },
-                     {
-                         $push: {
-                             donations: newDonation
-                         }
-                     },
-                     { new: true, runValidators: true }
-                 );
-                 return updatedUser;
-             };
-             throw AuthenticationError;
-         }*/
+        makeDonation: async (parent, { projectId, amount, donorId }) => {
+            try {
+                const newDonation = { projectId, amount, donorId };
+                await Project.findOneAndUpdate(
+                    { _id: projectId },
+                    {
+                        $push: {
+                            donations: newDonation
+                        }
+                    }, {
+                    new: true
+                });
+                return await User.findOneAndUpdate(
+                    { _id: donorId },
+                    {
+                        $push: {
+                            donations: newDonation
+                        }
+                    },
+                    { new: true, runValidators: true });
+            }
+            catch (err) { throw err; }
+        }
     }
 }
 

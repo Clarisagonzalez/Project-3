@@ -43,7 +43,7 @@ mutation addProject($projectName: String!, $projectDescription: String!, $expire
 }`;
 
 export const ADD_COMMENT = gql`
-mutation addComment($commentText: String!, $projectId: ID!, $commentAuthor: ID){
+mutation addComment($commentText: String!, $projectId: ID!, $commentAuthor: ID!){
     addComment(commentText: $commentText, projectId: $projectId, commentAuthor: $commentAuthor){
         _id
         projectName
@@ -82,6 +82,20 @@ export const DISLIKE_POST = gql`
     }
   }
 `;
-/*
+
 export const MAKE_DONATION = gql `
-`;*/
+mutation makeDonation($projectId: ID!, $amount: Float!, $donorId: ID!){
+  makeDonation(projectId: $projectId, amount: $amount, donorId: $donorId){
+    _id
+    username
+    email
+    donations {
+      _id
+      donorId
+      projectId
+      amount
+      donationDate
+    }
+  }
+}
+`;

@@ -4,14 +4,13 @@ import SingleProject from './SingleProject';
 import { useEffect } from 'react';
 import { useQuery} from '@apollo/client';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { MY_PROJECTS } from '../utils/queries';
+import { ME } from '../utils/queries';
 import Auth from '../utils/auth';
 
 export default function Dashboard() {
 
   const location = useLocation();
   const navigate = useNavigate();
-
   useEffect(() => {
     document.title = `${Auth.getProfile().data.username}'s dashboard!`
     return () => {
@@ -19,10 +18,10 @@ export default function Dashboard() {
     }
   }, [])
 
-  const { data, loading, error } = useQuery(MY_PROJECTS);
-
-  const myProjects = data?.myProjects || [];
-
+  const { data, loading, error } = useQuery(ME, {
+    variables: { _id: Auth.getProfile().data._id }
+  });
+  const myProjects = data?.me.projects || [];
   if (loading) return (<div>Loading...</div>);
 
 
@@ -36,7 +35,7 @@ export default function Dashboard() {
         <h2>See your campaigns/projects</h2>
         <Row>
           {myProjects.map(project =>
-          (<Col sm={12} md={6} lg={4} key={project._id}>
+          (<Col sm={12} md={6} key={project._id}>
             <SingleProject {...project} />
           </Col>))}
         </Row>
@@ -44,7 +43,8 @@ export default function Dashboard() {
       <Container>
         <Button onClick = {() => navigate('/update')}> Update your personal data!</Button>{' '}
         <Button onClick = {() => navigate('/create_project')}>Propose a new project!</Button>{' '}
-        <Button onClick = {() => navigate('/donations')}>See the projects you have supported</Button>
+        <Button onClick = {() => navigate('/donations')}>See the projects you have supported</Button>{' '}
+        <Button onClick = {() => navigate('/comments')}>See all of your comments</Button>
       </Container> 
     </>
   );

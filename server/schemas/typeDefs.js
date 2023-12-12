@@ -23,7 +23,7 @@ const typeDefs = `
 
     type Comment {
         _id: ID
-        commentAuthor: String
+        commentAuthor: ID
         commentText: String!
         commentDate: String
         upvotes: Int
@@ -35,21 +35,26 @@ const typeDefs = `
         donorId: ID
         amount: Float!
         donationDate: String
+        projectId: ID
     }
 
     type Auth {
             token: ID!
             user: User
         }
+    type CommentedProject{
+        projectName: String
+        comment: Comment
+    }
 
     type Query {
         users: [User]
         user(_id: ID!): User
         projects: [Project]
-        project(_id: ID!): Project
-        myProjects: [Project]
+        singleProject(_id: ID!): Project
+        me(_id: ID!): User
         commentsPerProject(projectId: ID!): [Comment]
-
+        allMyComments(_id: ID!): [CommentedProject]
         }
 
     type Mutation {
@@ -57,10 +62,10 @@ const typeDefs = `
         login(email: String!, password: String!): Auth
 
         addProject(projectName: String!, projectDescription: String!, expiresIn: Int!, goalAmount: Float!, userId: ID): User
-        addComment(commentText: String!, projectId: ID!, commentAuthor: ID): Project
+        addComment(commentText: String!, projectId: ID!, commentAuthor: ID!): Project
         upvoteComment(commentId: ID!,upvote: Boolean): Comment
         addReply(replyText: String!): Comment
-        makeDonation(projectId: ID!, amount: Float!) : Donation
+        makeDonation(projectId: ID!, amount: Float!, donorId: ID! ) : User
 
         updateUser(username: String, email: String, password: String): User
           }
