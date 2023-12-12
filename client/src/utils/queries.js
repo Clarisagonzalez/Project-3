@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_SINGLE_PROJECT = gql`
-  query singleProject($_id: ID) {
-    project(_id: $_id) {
+  query singleProject($projectId: ID!) {
+    project(projectId: $projectId) {
       _id
       projectName
       projectDescription

@@ -1,12 +1,12 @@
 {
     "name": "unity-fund",
     "version": "1.0.0",
-    "description": "A full stack application using the MERN stack together with GraphQL in order to allow authenticated users to search info about projects, propose new projects, and make donations to them.",
+    "description": "A full stack application using the MERN stack together with GraphQL in order to allow authenticated users to search info about projects/campaigns, propose new projects/campaigns, and make donations to them.",
     "main": "server/server.js",
     "scripts": {
         "start": "node server/server.js",
         "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-        "install": "cd server && npm i && cd ../client && npm i",
+        "install": "cd server && npm i && cd ../client && npm i --production=true",
         "build": "cd client && npm run build",
         "render-build": "npm install && npm run build",
         "seed": "cd server && node seeds/seed.js"
@@ -26,13 +26,5 @@
     "license": "MIT",
     "devDependencies": {
         "concurrently": "^5.1.0"
-    },
-    "dependencies": {
-        "bootstrap": "^5.3.2",
-        "bootstrap-icons": "^1.11.2",
-        "react-bootstrap": "^2.9.1",
-        "react-router-dom": "^6.20.1",
-        "stripe": "^14.7.0",
-        "vite": "^5.0.7"
     }
 }

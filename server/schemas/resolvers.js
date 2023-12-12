@@ -14,17 +14,17 @@ const resolvers = {
         projects: async () => {
             return await Project.find().populate('comments').populate('donations').lean({ getters: true, virtuals: true });
         },
-        project: async (parent, { _id }) => {
-            return await Project.findById(_id).populate('donations').populate('comments').lean({ getters: true, virtuals: true });
+        project: async (parent, { projectId }) => {
+            return await Project.findById(projectId).populate('donations').populate('comments').lean({ getters: true, virtuals: true });
         },
         commentsPerProject: async (parent, { projectId }) => {
             const project = await Project.findById(projectId).populate('comments');
             return project.comments;
         },
-        myProjects: async (parent, args, context) => {
+        myProjects: async (parent, args, { user }) => {
             try {
-                const user = await User.findById(context.user._id).populate('projects');
-                const myProjects = user?.projects || [];
+                const User = await User.findOne({ _id: user._id}).populate('projects');
+                const myProjects = User?.projects || [];
                 return myProjects;
             } catch (err) {
                 console.error('server/utils/resolvers.js', err);
@@ -101,18 +101,38 @@ const resolvers = {
             }
             throw AuthenticationError;
         },
-        /*Could serve as example to implement Stripe
-            addOrder: async (parent, { products }, context) => {
-                if (context.user) {
-                  const order = new Order({ products });
-          
-                  await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-          
-                  return order;
-                }
-          
-                throw AuthenticationError;
-              },*/
+        makeDonation: async (parent, { projectId, amount }, context) => {
+            if(context.user) {
+
+                await Project.findByIdAndUpdate(projectId,
+                    {
+                        $addToSet: {
+                            donations: {
+                                projectId,
+                                amount,
+                                userId: context.user._id
+                            }
+                        }
+                    },
+                    { new: true });
+                return await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    {
+                        $addToSet: {
+                            donations: {
+                                projectId,
+                                amount,
+                                userId: context.user._id
+                            }
+                        }
+                    },
+                    { new: true, runValidators: true }
+                );
+            }
+            throw AuthenticationError;
+
+        }
+   
         /* makeDonation: async (parent, { projectId, amount }, context) => {
              if (context.user) {
                  const newDonation = { projectId, amount };
