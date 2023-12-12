@@ -16,9 +16,7 @@ import SingleUser from './pages/SingleUser';
 import UpdateUser from './pages/UpdateUser';
 import CreateProject from './pages/CreateProject';
 import Comments from './pages/CommentsPerProject';
-import AboutUs from './components/AboutUs.jsx';
-import HowToDonate from './components/HowToDonate.jsx';
-import HowToCampaign from './components/HowToCampaign.jsx';
+import Donate from './pages/Donate';
 
 const router = createBrowserRouter([
   {
@@ -63,14 +61,8 @@ const router = createBrowserRouter([
         path: '/:id/comments',
         element: <Comments />
       },{
-        path: '/about',
-        element: <AboutUs />
-      },{
-        path: '/howtodonate',
-        element: <HowToDonate />
-      },{
-        path: '/howtocampaign',
-        element: <HowToCampaign/>
+        path: '/:id/donate',
+        element: <Donate />
       }
     ]
   }

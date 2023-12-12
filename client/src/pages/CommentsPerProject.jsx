@@ -18,7 +18,7 @@ export default function Comments() {
     });
 
     const comments = data?.commentsPerProject || [];
-    console.log(comments)
+    
     if(loading) return <div> Loading...</div>;
     if(error) return <div>{error.message}</div>
 

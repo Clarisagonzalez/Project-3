@@ -46,7 +46,7 @@ const typeDefs = `
         users: [User]
         user(_id: ID!): User
         projects: [Project]
-        project(_id: ID!): Project
+        project(projectId: ID!): Project
         myProjects: [Project]
         commentsPerProject(projectId: ID!): [Comment]
 
@@ -60,7 +60,7 @@ const typeDefs = `
         addComment(commentText: String!, projectId: ID!, commentAuthor: ID): Project
         upvoteComment(commentId: ID!,upvote: Boolean): Comment
         addReply(replyText: String!): Comment
-        makeDonation(projectId: ID!, amount: Float!) : Donation
+        makeDonation(projectId: ID!, amount: Float!) : User
 
         updateUser(username: String, email: String, password: String): User
           }
