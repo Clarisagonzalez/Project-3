@@ -7,6 +7,7 @@ const styles = {
   header: {
     backgroundColor: '#19747E',
     padding: '20px',
+    margin: '20px',
     textAlign: 'center',
     color: '#D1E8E2',
     fontFamily: 'Nunito, sans-serif'
