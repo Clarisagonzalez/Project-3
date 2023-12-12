@@ -4,7 +4,7 @@ import Auth from '../utils/auth';
 
 const Nav = () => {
   return (
-    <Container className="navbar" style={{ backgroundColor: '#D1E8E2', fontFamily: 'Nunito, sans-serif' }}>
+    <Container className="navbar" style={{ backgroundColor: '#D1E8E2', fontFamily: 'Nunito, sans-serif', }}>
       <Row className="justify-content-center">
           <Col sm={12} md={6} lg={3}><ul><li><Link to='/' style={{ textDecoration: 'none' }}>Home</Link></li></ul></Col>
           <Col sm={12} md={6} lg={3}><ul><li><Link to="/users" style={{ textDecoration: 'none' }}>Users</Link></li></ul></Col>
