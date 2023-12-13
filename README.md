@@ -21,14 +21,17 @@ manage donation campaigns. It fosters a community of generosity, enabling causes
 their financial goals through seamless contributions. 
 
 ## Installation
-
+1. Npm install
+2. Npm Start 
 
 ## Getting Started
+
+When clicking on the deployed site. You will be able to sign up and begin exploring the page. You can create your own campaign as well as donate to one!
 
 
 ## Deployment
 
-Visit our [deployed site](https://unity-fund-erno.onrender.com/)to experience UnityFund in action!
+Visit our [deployed site](https://unity-fund-erno.onrender.com/) to experience UnityFund in action!
 
 
 ## Visuals
