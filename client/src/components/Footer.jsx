@@ -24,7 +24,11 @@ const Footer = () => {
       <Row>
         <Col className="copyright" style={{ color: '#333', fontSize: '14px' }}>
           <p>&copy;{new Date().getFullYear()} UnityFund. All rights reserved.</p>
-          {location.pathname !== '/' && <Button className='btn btn-lg' onClick={() => navigate(-1)}>Go Back</Button>}
+          {location.pathname !== '/' && (
+          <Button className='btn btn-lg' style={{ backgroundColor: '#19747E', color: '#FFFFFF' }} onClick={() => navigate(-1)}>
+            Go Back
+            </Button>
+            )}
         </Col>
       </Row>
     </Container>

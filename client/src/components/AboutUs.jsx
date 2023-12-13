@@ -28,10 +28,10 @@ const AboutUs = () => {
             donation campaigns. We believe in fostering a community of generosity
              where causes can thrive and individuals can make a real difference.
           </p>
-          {/* Display the UnityFund.png image */}
+      {/* Display the UnityFund.png image */}
 <div style={{ textAlign: 'center', margin: '20px' }}>
         <img src={unityFundImage} alt="UnityFund Logo" style={{ width: '850px', height: '350px' }} />
-      </div>
+         </div>
          </div>
       
     </div>

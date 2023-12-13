@@ -17,6 +17,9 @@ import UpdateUser from './pages/UpdateUser';
 import CreateProject from './pages/CreateProject';
 import Comments from './pages/CommentsPerProject';
 import Donate from './pages/Donate';
+import AboutUs from './components/AboutUs.jsx';
+import HowToDonate from './components/HowToDonate.jsx';
+import HowToCampaign from './components/HowToCampaign.jsx';
 
 const router = createBrowserRouter([
   {
@@ -63,6 +66,15 @@ const router = createBrowserRouter([
       },{
         path: '/:id/donate',
         element: <Donate />
+      },{
+        path: '/about',
+        element: <AboutUs />
+      },{
+        path: '/howtodonate',
+        element: <HowToDonate />
+      },{
+        path: '/howtocampaign',
+        element: <HowToCampaign/>
       }
     ]
   }

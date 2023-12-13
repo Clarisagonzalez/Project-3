@@ -1,30 +1,56 @@
-
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 
-const Nav = () => {
+
+const NavBar = () => {
   return (
-    <Container className="navbar" style={{ backgroundColor: '#D1E8E2', fontFamily: 'Nunito, sans-serif', }}>
-      <Row className="justify-content-center">
-          <Col sm={12} md={6} lg={3}><ul><li><Link to='/' style={{ textDecoration: 'none' }}>Home</Link></li></ul></Col>
-          <Col sm={12} md={6} lg={3}><ul><li><Link to="/users" style={{ textDecoration: 'none' }}>Users</Link></li></ul></Col>
-          <Col sm={12} md={6} lg={3}><ul><li><Link to="/projects" style={{ textDecoration: 'none' }}>Projects</Link></li></ul></Col>
-          <Col sm={12} md={6} lg={3}><ul><li><Link to="/donate" style={{ textDecoration: 'none' }}>Donate</Link></li></ul></Col>
-        {!Auth.loggedIn() ? (
-          <>
-            <Col sm={12} md={6} lg={3}><ul><li><Link to="/login" style={{ textDecoration: 'none' }}>Log In</Link></li></ul></Col>
-            <Col sm={12} md={6} lg={3}><ul><li><Link to="/signup" style={{ textDecoration: 'none' }}>Sign Up</Link></li></ul></Col>
-          </>
-        ) : (
-          <>
-            <Col sm={12} md={6} lg={3}><ul><li><Link to="/dashboard" style={{ textDecoration: 'none' }}>My Dashboard</Link></li></ul></Col>
-            <Col sm={12} md={6} lg={3}><ul><li><Link to="/" style={{ textDecoration: 'none' }} onClick={() => Auth.logout()}>Log Out</Link></li></ul></Col>
-          </>
-        )}
-      </Row>
-    </Container>
+    <Navbar collapseOnSelect expand="lg" style={{ backgroundColor: '#D1E8E2', fontFamily: 'Nunito, sans-serif', margin: '20px' }}>
+      <Container>
+        <Navbar.Brand as={Link} to="/" style={{ fontFamily: 'DM Serif Display' }}>
+          Unity Fund
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/" style={{ textDecoration: 'none' }}>
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/users" style={{ textDecoration: 'none' }}>
+              Users
+            </Nav.Link>
+            <Nav.Link as={Link} to="/projects" style={{ textDecoration: 'none' }}>
+              Projects
+            </Nav.Link>
+            <Nav.Link as={Link} to="/donate" style={{ textDecoration: 'none' }}>
+              Donate
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            {!Auth.loggedIn() ? (
+              <>
+                <Nav.Link as={Link} to="/login" style={{ textDecoration: 'none' }}>
+                  Log In
+                </Nav.Link>
+                <Nav.Link as={Link} to="/signup" style={{ textDecoration: 'none' }}>
+                  Sign Up
+                </Nav.Link>
+              </>
+            ) : (
+              <>
+                <Nav.Link as={Link} to="/dashboard" style={{ textDecoration: 'none' }}>
+                  My Dashboard
+                </Nav.Link>
+                <Nav.Link as={Link} to="/" style={{ textDecoration: 'none' }} onClick={() => Auth.logout()}>
+                  Log Out
+                </Nav.Link>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
-export default Nav;
+export default NavBar;
