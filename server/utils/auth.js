@@ -15,7 +15,7 @@ module.exports = {
   authMiddleware: async function ({ req }) {
     
     // allows token to be sent via  req.query or headers
-    let token = await req.headers.authorization;
+    let token = await req.body.token || await req.query.token || await req.headers.authorization;
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
