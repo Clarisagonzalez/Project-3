@@ -61,6 +61,10 @@ const router = createBrowserRouter([
         path: '/donations',
         element: <Donations />
       },{
+        path: '/donate',
+        element: <Donate />
+      },
+      {
         path: '/:id/comments',
         element: <Comments />
       },{

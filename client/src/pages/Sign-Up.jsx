@@ -1,4 +1,4 @@
-import { Button, Form, Alert } from 'react-bootstrap';
+import { Button, Form, Alert, Container } from 'react-bootstrap';
 
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -58,51 +58,50 @@ const SignUp = () => {
   };
 
   return (
-    <div style={{background:'#f2f2f2'}}>
-      <h2 style={{ textAlign: 'center', fontFamily: 'DM Serif Display', fontSize: '2.50rem'}} >Sign Up</h2>
-      <Form noValidate validated={validated} className="align-center bg-secondary text-center" onSubmit={handleSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </Alert>
-        <Form.Group className="mb-3">
-          <Form.Label>
-            Username:
-            <Form.Control type="text" name="username" value={formData.username} onChange={handleChange} required />
-          </Form.Label>
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
+    <Container className="my-4 p-4 shadow-lg rounded" style={{ background: '#f2f2f2', maxWidth: '500px' }}>
+      <h2 className="text-center mb-4" style={{ fontFamily: 'DM Serif Display', fontSize: '2.50rem' }}>Sign Up</h2>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        {showAlert && (
+          <Alert dismissible onClose={() => setShowAlert(false)} variant="danger">
+            Something went wrong with your signup!
+          </Alert>
+        )}
 
+        <Form.Group className="mb-3">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control type="text" name="username" value={formData.username} onChange={handleChange} required />
+          <Form.Control.Feedback type="invalid">Username is required!</Form.Control.Feedback>
         </Form.Group>
 
-        <br />
-        <Form.Group className="mb-3" style={{ marginBottom: '2.25rem' }}>
-          <Form.Label>
-            Email:
-            <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} required />
-          </Form.Label>
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </ Form.Group>
-        <br />
         <Form.Group className="mb-3">
-          <Form.Label>
-            Password:
-            <Form.Control type="password" name="password" value={formData.password} onChange={handleChange} required />
-          </Form.Label>
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </ Form.Group>
-        <br />
-        <Button style= {{backgroundColor: '#19747E'}}
+          <Form.Label>Email:</Form.Label>
+          <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} required />
+          <Form.Control.Feedback type="invalid">Email is required!</Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control type="password" name="password" value={formData.password} onChange={handleChange} required />
+          <Form.Control.Feedback type="invalid">Password is required!</Form.Control.Feedback>
+        </Form.Group>
+
+        <Button
+          className="w-100"
+          style={{ backgroundColor: '#19747E', borderColor: '#19747E' }}
           disabled={!(formData.username && formData.email && formData.password)}
+          variant="primary"
           type="submit"
-          variant='primary'>
+        >
           Sign Up
         </Button>
       </Form>
+
       {error && (
-        <div className="my-3 p-3 bg-danger text-white">
+        <div className="mt-3 text-center p-3 bg-danger text-white">
           {error.message}
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -61,55 +61,84 @@ const Donate = () => {
 
   return (
     <>
-      <Card >
-        <Card.Header>
-          <h3>{project.projectName}</h3>
-          Amount that needs to be raised ${project.goalAmount}!<br />
-          Hurry! This campaign expires in {project.expiresIn} days!
-        </Card.Header>
-        <Card.Body>
-          {!project.donations.length ? (<div> No donations yet...</div>) : (project.donations.map(donation => (
-            <>
-            <div>{donation.amount}</div><br/>
-            <div>{donation.donationDate}</div><br/>
-            <div>{donation.donorId}</div>
-            </>
-          )))}
-        </Card.Body>
-      </Card>
-      <div>
-        <h2>Donate to {project.projectName}</h2>
-        <Form className='bg-secondary text-center' onSubmit={handleSubmit}>
-          {error && <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-            Something went wrong with your login credentials!
+  <div className="container mt-4">
+    <Card className="mb-4">
+      <Card.Header className="text-center">
+        <h3>{project.projectName}</h3>
+        <p>Amount that needs to be raised: ${project.goalAmount}!<br />
+        Hurry! This campaign expires in {project.expiresIn} days!</p>
+      </Card.Header>
+      <Card.Body>
+        {!project?.donations?.length ? (
+          <div className="text-center">No donations yet...</div>
+        ) : (
+          project.donations.map(donation => (
+            <div className="mb-2">
+              <div>${donation.amount}</div>
+              <div>{donation.donationDate}</div>
+              <div>{donation.donorId}</div>
+            </div>
+          ))
+        )}
+      </Card.Body>
+    </Card>
+    
+    <div>
+      <h2 className="text-center mb-4">Donate to {project.projectName}</h2>
+      <Form className="bg-light p-4 rounded" onSubmit={handleSubmit}>
+        {error && (
+          <Alert
+            dismissible
+            onClose={() => setShowAlert(false)}
+            show={showAlert}
+            variant="danger"
+            className="mb-3"
+          >
+            Something went wrong with your donation!
             <br />
             {error.message}
-          </Alert>}
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor='amount'>
-              Amount to Donate:
-              <Form.Control type="text" name="amount" placeholder="Enter the donation in USD($)" value={donationData.amount} onChange={handleChange} required />
-            </Form.Label>
-            <Form.Control.Feedback type='invalid'>Please, specify the amount to donate.</Form.Control.Feedback>
-          </Form.Group>
-          <br />
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor='password'>
-              Method of Payment:
-              <Form.Control type="text" name="paymentType" placeholder="Enter the method of payment" value={donationData.paymentType} onChange={handleChange} required />
-            </Form.Label>
-            <Form.Control.Feedback type='invalid'>You need to stipulate the method of payment!</Form.Control.Feedback>
-          </Form.Group>
-          <br />
-          <Button
-            disabled={!(donationData.amount && donationData.paymentType)}
-            variant="primary"
-            type="submit">
-            Make Donation!
-          </Button>
-        </Form>
-      </div>
-    </>
+          </Alert>
+        )}
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="amount">Amount to Donate:</Form.Label>
+          <Form.Control
+            type="number"
+            name="amount"
+            className="form-control-lg"
+            placeholder="Enter the donation in USD($)"
+            value={donationData.amount}
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label htmlFor="paymentType">Method of Payment:</Form.Label>
+          <Form.Control
+            type="text"
+            name="paymentType"
+            className="form-control-lg"
+            placeholder="Enter the method of payment"
+            value={donationData.paymentType}
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
+
+        <Button
+        style={{ backgroundColor: '#19747E', borderColor: '#19747E' }}
+          disabled={!(donationData.amount && donationData.paymentType)}
+          variant="primary"
+          type="submit"
+          className="btn-lg"
+        >
+          Make Donation!
+        </Button>
+      </Form>
+    </div>
+  </div>
+</>
+
   );
 };
 
