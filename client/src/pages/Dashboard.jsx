@@ -30,7 +30,8 @@ export default function Dashboard() {
       <Container>
         <h1>Welcome to your Dashboard, <strong><i>{Auth.getProfile().data.username}</i></strong>! What do you want to do today?:</h1>
       </Container>
-        {error ? <div className='text-center text-danger'>{error.message}</div>: myProjects.length ? (<Container>
+        {error ? <div className='text-center text-danger'>{error.message}</div>: myProjects.length ? 
+        (<Container>
         <h2>See your campaigns/projects</h2>
         <Row>
           {myProjects.map(project =>

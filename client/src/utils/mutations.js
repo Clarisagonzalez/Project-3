@@ -65,6 +65,20 @@ mutation updateUser($username: String, $email: String, $password: String){
     }
 }`;
 
+export const MAKE_DONATION2 = gql`
+mutation makeDonation($projectId: ID!, $amount: Float!){
+  makeDonation(projectId: $projectId, amount: $amount){
+  _id
+  username
+  email
+  donations{
+    donorId
+    amount
+    donationDate
+    projectId
+  }
+ }
+}`
 export const LIKE_POST = gql`
   mutation likePost($postId: ID!) {
     likePost(postId: $postId) {

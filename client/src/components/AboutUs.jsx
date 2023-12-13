@@ -1,11 +1,12 @@
 import React from 'react';
-
+import { Image } from 'react-bootstrap';
+import unityFundImage from '../../public/images/UnityFund.png';
 
 const AboutUs = () => {
   return (
-        <div style={{ textAlign: 'center'}}>
+        <div style={{ textAlign: 'center', }}>
      <div className="about-header">
-      <h2 style={{ fontFamily:'Nunito, sans-serif'}}>
+      <h2 style={{ fontFamily: 'DM Serif Display'}}>
         About Us
         </h2>
         </div>
@@ -18,7 +19,7 @@ const AboutUs = () => {
         </p>
         </div>
         <div className="mission-header">
-         <h2 style={{ fontFamily:'Nunito, sans-serif'}}> Our Mission</h2>
+         <h2 style={{ fontFamily: 'DM Serif Display'}}> Our Mission</h2>
          </div>
          <div className="mission-content">
           <p>
@@ -27,11 +28,12 @@ const AboutUs = () => {
             donation campaigns. We believe in fostering a community of generosity
              where causes can thrive and individuals can make a real difference.
           </p>
+      {/* Display the UnityFund.png image */}
+<div style={{ textAlign: 'center', margin: '20px' }}>
+        <img src={unityFundImage} alt="UnityFund Logo" style={{ width: '850px', height: '350px' }} />
          </div>
-      <div className="bottom-image">
-    
-        
-        </div>
+         </div>
+      
     </div>
   );
 };

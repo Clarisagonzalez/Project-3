@@ -7,7 +7,7 @@ const HowToCampaign = () => {
   return (
     <div style={{ fontFamily:'Nunito, sans-serif'}} >
         <div className="about-header">
-      <h2 style={{ textAlign: 'center', }}>How to Set Up Your Campaign</h2>
+        <h2 style={{ fontFamily: 'DM Serif Display', textAlign: 'center' }}>How to Set Up Your Campaign</h2>
 </div>
 <div className="about-content">
       <p>Welcome to UnityFund! Setting up a campaign is easy. Follow these simple steps:</p>
@@ -47,7 +47,7 @@ const HowToCampaign = () => {
       <p>That's it! You've successfully set up your campaign on UnityFund. Thank you for making a positive impact!</p>
       {/* Display the UnityFund.png image */}
 <div style={{ textAlign: 'center', margin: '20px' }}>
-        <img src={unityFundImage} alt="UnityFund Logo" style={{ width: '300px', height: 'auto' }} />
+        <img src={unityFundImage} alt="UnityFund Logo" style={{ width: '850px', height: '350px' }} />
       </div>
     </div>
     </div>
