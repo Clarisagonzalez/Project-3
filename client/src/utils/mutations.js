@@ -79,23 +79,6 @@ mutation makeDonation($projectId: ID!, $amount: Float!){
   }
  }
 }`
-export const LIKE_POST = gql`
-  mutation likePost($postId: ID!) {
-    likePost(postId: $postId) {
-      _id
-      likeCount
-    }
-  }
-`;
-
-export const DISLIKE_POST = gql`
-  mutation dislikePost($postId: ID!) {
-    dislikePost(postId: $postId) {
-      _id
-      dislikeCount
-    }
-  }
-`;
 
 export const MAKE_DONATION = gql `
 mutation makeDonation($projectId: ID!, $amount: Float!, $donorId: ID!){
