@@ -10,7 +10,7 @@ const resolvers = {
             return await User.find().populate('projects').lean({ getters: true, virtuals: true });
         },
         user: async (parent, { _id }) => {
-            return await User.findById(_id).populate('donations').populate('comments').populate('projects').lean({ getters: true, virtuals: true });
+            return await User.findById(_id).lean();
         },
         projects: async () => {
             return await Project.find().populate('comments').populate('donations').lean({ getters: true, virtuals: true });
@@ -32,8 +32,8 @@ const resolvers = {
         },
         allMyComments: async (parent, { _id }) => {
             try{
-                const me = User.findById(_id).populate('comments');
-                const myComments = me;
+                const me = await User.findById(_id).populate('comments').lean({ getters: true });
+                const myComments = me.comments;
                 const projectIds = myComments.map((comment) => comment.projectId);
                 const projectNames = [];
                 for(let i=0; i < myComments.length; i++){
@@ -44,10 +44,31 @@ const resolvers = {
                 const commentedProjects = [];
                 for(let i = 0; i < myComments.length; i++){
                     const commentedProject = { comment: myComments[i], projectName: projectNames[i] };
-                    commentedProjects(commentedProject);
+                    commentedProjects.push(commentedProject);
                 };
                 return commentedProjects;
             } catch(err) {
+                throw err;
+            }
+        },
+        allMyDonations: async (parent, { _id }) => {
+            try {
+                const me = await User.findById(_id).populate('donations').lean({ getters: true });
+                const myDonations = me.donations;
+                const projectIds = myDonations.map((donation) => donation.projectId);
+                const projectNames = [];
+                for(let i=0; i < myDonations.length; i++){
+                    const project = await Project.findById(projectIds[i]);
+                    const projectName = project.projectName;
+                    projectNames.push(projectName);
+                };
+                const projectsDonatedTo = [];
+                for(let i=0; i < myDonations.length; i++){
+                    const projectDonatedTo = { donation: myDonations[i], projectName: projectNames[i] };
+                    projectsDonatedTo.push(projectDonatedTo);
+                };
+                return projectsDonatedTo;
+            } catch (err) {
                 throw err;
             }
         }

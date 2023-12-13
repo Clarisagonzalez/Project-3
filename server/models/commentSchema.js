@@ -19,7 +19,9 @@ const commentSchema = Schema(
         commentDate: {
             type: Date,
             default:  Date.now,
-            get: (timestamp) =>  format_date(timestamp)
+            get: function() {
+                return format_date(this.commentDate);
+            }
         },
         upvotes: {
             type: Number,

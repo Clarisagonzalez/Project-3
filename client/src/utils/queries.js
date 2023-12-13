@@ -28,17 +28,16 @@ export const QUERY_ALL_PROJECTS = gql`
 `;
 
 export const QUERY_USER = gql`
-query singleUser($_id: ID){
+query user($_id: ID!){
         user(_id: $_id) {
+          _id
         username
         email
         donations{
-            donorId
             amount
             donationDate
         }
         comments {
-            commentAuthor
             commentText
             commentDate
             upvotes
@@ -50,12 +49,6 @@ query singleUser($_id: ID){
             projectDate
             expiresIn
             goalAmount
-            comments{
-                commentText
-            }
-            donations {
-                amount
-            }
         }
       
     }
@@ -114,11 +107,25 @@ export const ALL_MY_COMMENTS = gql`
 query allMyComments($_id: ID!){
   allMyComments(_id: $_id){
     comment{
+      _id
       commentText
+      commentDate
     }
     projectName
   }
 }`;
+
+export const ALL_MY_DONATIONS = gql`
+query allMyDonations($_id: ID!){
+  allMyDonations(_id: $_id){
+    donation {
+      _id
+      amount
+      donationDate
+    }
+    projectName
+  }
+}`
 
 export const COMMENTS_PER_PROJECT = gql`
 query commentsPerProject($projectId: ID!) {

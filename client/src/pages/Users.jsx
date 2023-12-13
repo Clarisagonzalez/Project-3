@@ -25,12 +25,12 @@ const Users = () => {
                     {users.map((user) =>
                     (<Card key={user._id}>
                         <Card.Header>
-                            <Link to={`/users/${user._id}`}>{user.username}</Link>
+                            <Link to={`/users/${user._id}`} style = {{textDecoration: 'none'}}>Click &rarr;<span style={{textDecoration: 'underline'}}>{user.username}</span> in order to see all the comments by the user and the causes they have donated to.</Link>
                             <br/>
                             <span> Contact <i>{user.username}</i>{' '} at : <a href = {`mailto:${user.email}`}  target= '_blank' rel='noopener noreferrer'>{user.email}</a> </span>
                         </Card.Header>
                         {user.projects.map((project) =>
-                        ( <Card.Body key={project._id}>
+                        ( <><Card.Body key={project._id}>
                             <Card.Title>
                                 <h2>{project.projectName}</h2>
                                 <br/>
@@ -40,7 +40,8 @@ const Users = () => {
                             This project was proposed on {project.projectDate}<br/>
                             {project.expiresIn} days left to raise funds!
                             </Card.Subtitle>
-                        </Card.Body>
+                        </Card.Body><hr/>
+                        </>
                         ))}
                     </Card>))}
                 </Col>

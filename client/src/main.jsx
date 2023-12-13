@@ -9,7 +9,7 @@ import NotFound from './pages/NotFound';
 import LoginForm from './pages/LoginForm';
 import SignUp from './pages/Sign-Up';
 import Projects from './pages/Projects';
-import Donations from './pages/Donations';
+import MyDonations from './pages/MyDonations.jsx';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import SingleUser from './pages/SingleUser';
@@ -19,7 +19,7 @@ import Comments from './pages/CommentsPerProject';
 import AboutUs from './components/AboutUs.jsx';
 import HowToDonate from './components/HowToDonate.jsx';
 import HowToCampaign from './components/HowToCampaign.jsx';
-import MyComments from './pages/Comments';
+import MyComments from './pages/MyComments.jsx';
 
 const router = createBrowserRouter([
   {
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         path: '/users',
         element: <Users />
       },{
-        path: '/users/:userId',
+        path: '/users/:id',
         element: <SingleUser />
       },{
         path: '/update',
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         element: <CreateProject />
       },{
         path: '/donations',
-        element: <Donations />
+        element: <MyDonations />
       },{
         path: '/:id/comments',
         element: <Comments />

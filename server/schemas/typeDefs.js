@@ -42,9 +42,15 @@ const typeDefs = `
             token: ID!
             user: User
         }
-    type CommentedProject{
+
+    type CommentedProject {
         projectName: String
         comment: Comment
+    }
+
+    type ProjectDonatedTo {
+        donation: Donation
+        projectName: String
     }
 
     type Query {
@@ -55,6 +61,7 @@ const typeDefs = `
         me(_id: ID!): User
         commentsPerProject(projectId: ID!): [Comment]
         allMyComments(_id: ID!): [CommentedProject]
+        allMyDonations(_id: ID!): [ProjectDonatedTo]
         }
 
     type Mutation {
