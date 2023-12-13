@@ -28,8 +28,27 @@ their financial goals through seamless contributions.
 
 ## Deployment
 
+Visit our [deployed site](https://unity-fund-erno.onrender.com/)to experience UnityFund in action!
+
 
 ## Visuals
+![Screenshot 1](client/public/images/visual1.png)
+
+![Screenshot 2](client/public/images/visual2.png)
+
+![Screenshot 3](client/public/images/visual3.png)
+
+![Screenshot 4](client/public/images/visual4.png)
+
+![Screenshot 5](client/public/images/visual6.png)
+
+![Screenshot 6](client/public/images/visual7.png)
+
+![Screenshot 7](client/public/images/visual8.png)
+
+![Screenshot 8](client/public/images/visual9.png)
+
+
 
 
 ## Contact
