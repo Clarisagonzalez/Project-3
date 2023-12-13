@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -10,11 +11,15 @@ const styles = {
     margin: '20px',
     textAlign: 'center',
     color: '#D1E8E2',
-    fontFamily: 'Nunito, sans-serif'
+    fontFamily: 'DM Serif Display',
+    width: '100%',
   },
-  logo: {
-    width: '100px',
-    height: 'auto',
+  buttonRow: {
+    marginTop: '20px'
+  },
+  button: {
+    width: '153px', 
+    backgroundColor: '#D1E8E2'
   },
 };
 
@@ -22,10 +27,22 @@ const Header = () => {
   return (
     <Container style={styles.header} >
       <img src="/logo.png" alt="Logo" style={{ width: '200px', height: 'auto', borderRadius: '10px' }} />
-      <Row>
-        <Col sm={12} md={3} ><li><Link to="/about">About Us</Link></li></Col>
-        <Col sm={12} md={3} ><li><Link to="/howtodonate">How to start donating</Link></li></Col>
-        <Col sm={12} md={3} ><li><Link to="/howtocampaign">How to set up a campaign</Link></li></Col>
+      <Row style={{ ...styles.buttonRow, justifyContent: 'center' }}>
+        <Col sm={12} md={3} >
+            <Link to="/about">
+              <Button variant="light" style={styles.button}> About Us</Button>
+              </Link>
+            </Col>
+        <Col sm={12} md={3} >
+            <Link to="/howtodonate">
+            <Button variant="light" style={styles.button}> How to Donate</Button>
+              </Link>
+            </Col>
+        <Col sm={12} md={3} >
+            <Link to="/howtocampaign">
+            <Button variant="light" style={styles.button}> How to campaign</Button>
+              </Link>
+            </Col>
       </Row>
     </Container>
   );

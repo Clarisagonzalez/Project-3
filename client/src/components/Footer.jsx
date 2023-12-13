@@ -6,7 +6,7 @@ const Footer = () => {
   const location = useLocation();
 
   return (
-    <Container fluid className='footer' style={{ backgroundColor: '#f2f2f2', padding: '20px', marginTop: '30px', textAlign: 'center', fontFamily: 'Nunito, sans-serif' }}>
+    <Container fluid className='footer' style={{ backgroundColor: '#f2f2f2', padding: '20px', marginTop: '120px', textAlign: 'center', fontFamily: 'Nunito, sans-serif' }}>
       <Row className="footer-content" style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <Col className="contact-info">
           <h3>Contact Us</h3>
@@ -24,7 +24,11 @@ const Footer = () => {
       <Row>
         <Col className="copyright" style={{ color: '#333', fontSize: '14px' }}>
           <p>&copy;{new Date().getFullYear()} UnityFund. All rights reserved.</p>
-          {location.pathname !== '/' && <Button className='btn btn-lg' onClick={() => navigate(-1)}>Go Back</Button>}
+          {location.pathname !== '/' && (
+          <Button className='btn btn-lg' style={{ backgroundColor: '#19747E', color: '#FFFFFF' }} onClick={() => navigate(-1)}>
+            Go Back
+            </Button>
+            )}
         </Col>
       </Row>
     </Container>

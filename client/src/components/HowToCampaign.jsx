@@ -7,7 +7,7 @@ const HowToCampaign = () => {
   return (
     <div style={{ fontFamily:'Nunito, sans-serif'}} >
         <div className="about-header">
-      <h2 style={{ textAlign: 'center', }}>How to Set Up Your Campaign</h2>
+        <h2 style={{ fontFamily: 'DM Serif Display', textAlign: 'center' }}>How to Set Up Your Campaign</h2>
 </div>
 <div className="about-content">
       <p>Welcome to UnityFund! Setting up a campaign is easy. Follow these simple steps:</p>

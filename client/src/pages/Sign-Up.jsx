@@ -58,8 +58,8 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h2 style={{ textAlign: 'center', fontFamily:'Nunito, sans-serif'}} >Sign Up</h2>
+    <div style={{background:'#f2f2f2'}}>
+      <h2 style={{ textAlign: 'center', fontFamily: 'DM Serif Display', fontSize: '2.50rem'}} >Sign Up</h2>
       <Form noValidate validated={validated} className="align-center bg-secondary text-center" onSubmit={handleSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
           Something went wrong with your signup!
@@ -74,7 +74,7 @@ const SignUp = () => {
         </Form.Group>
 
         <br />
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" style={{ marginBottom: '2.25rem' }}>
           <Form.Label>
             Email:
             <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} required />
@@ -90,7 +90,7 @@ const SignUp = () => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </ Form.Group>
         <br />
-        <Button
+        <Button style= {{backgroundColor: '#19747E'}}
           disabled={!(formData.username && formData.email && formData.password)}
           type="submit"
           variant='primary'>
