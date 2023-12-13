@@ -30,7 +30,7 @@ export default function Dashboard() {
   return (
     <>
       <Container>
-        <h1>Welcome to your Dashboard, <strong><i>{Auth.getProfile().data.username}</i></strong>! What do you want to do today?:</h1>
+        <h1 style={{ fontFamily: 'DM Serif Display'}}>Welcome to your Dashboard, <strong><i>{Auth.getProfile().data.username}</i></strong>! What do you want to do today?:</h1>
       </Container>
         {error ? <div className='text-center text-danger'>{error.message}</div>: myProjects.length ? 
         (<Container>
