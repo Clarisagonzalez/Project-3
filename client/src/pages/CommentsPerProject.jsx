@@ -18,14 +18,13 @@ export default function Comments() {
     });
 
     const comments = data?.commentsPerProject || [];
-    console.log(comments)
     if(loading) return <div> Loading...</div>;
     if(error) return <div>{error.message}</div>
 
     return (
         <Container>
             <Row>
-            {comments.map(comment => (<Col key={comment._id}>
+            {!comments.length ? <h2>There are no comments available for this project.</h2> : comments.map(comment => (<Col key={comment._id}>
             <Card>
                 <Card.Header>
                     <Card.Title>

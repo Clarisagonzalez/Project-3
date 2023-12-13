@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { useLocation } from 'react-router-dom';
 import Auth from '../utils/auth';
 import SingleDonation from '../components/SingleDonation';
+import { Link } from 'react-router-dom';
 
 export default function Donations() {
 
@@ -24,12 +25,12 @@ export default function Donations() {
   if (loading) return <div> Loading ...</div>
   return (
     <Container>
-      <h2>Causes you have supported</h2>
+      <h2>Causes you have supported:</h2>
       <Row>
-        {myDonations.map(project =>
+        {!myDonations.length ? (<h2>Press on the link &rarr;<Link to='/projects'>Projects</Link> to choose a project. Any donation will be thanked.</h2>) : (myDonations.map(project =>
         (<Col sm={12} md={6} key={project.donation._id}>
           <SingleDonation { ...project} />
-        </Col>))}
+        </Col>)))}
       </Row>
     </Container>
   );

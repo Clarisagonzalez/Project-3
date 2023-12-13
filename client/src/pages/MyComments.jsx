@@ -16,10 +16,10 @@ export default function MyComments() {
         <Container>
         <h2>Here are all of the projects/campaigns you have commented on:</h2>
         <Row>
-          {myComments.map((comment) =>
+          {myComments.length ? (myComments.map((comment) =>
           (<Col sm={12} md={6} key={comment.comment._id}>
            <SingleComment {...comment} />
-          </Col>))}
+          </Col>))) : <h2>You haven't commented on any project yet. Kind suggestions are always welcome!</h2>}
         </Row>
       </Container>
     );

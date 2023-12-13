@@ -16,10 +16,10 @@ const SingleUser =  () => {
     if(loading) return <div>Loading...</div>;
     return (
         <Container>
-            <h1>{`All comments`}</h1>
+            <h1>{`All comments by ${username}`}</h1>
             <SingleUserComments _id={id} />
             <hr />
-            <h1>{`All donations`}</h1>
+            <h1>{`All donations by ${username}`}</h1>
             <SingleUserDonations _id={id} />
         </Container>
     );

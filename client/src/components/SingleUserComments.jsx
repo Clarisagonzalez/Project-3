@@ -14,10 +14,10 @@ const comments = data?.allMyComments || [];
 if(loading) return <div>Loading...</div>;
 return (
 <Row>
-{comments.map((comment) => (
+{!comments.length ? <h2>No comments so far... </h2> : (comments.map((comment) => (
     <Col key={comment.comment._id}>
         <SingleComment {...comment} />
-    </Col>
+    </Col>)
 ))}
 </Row>
 );

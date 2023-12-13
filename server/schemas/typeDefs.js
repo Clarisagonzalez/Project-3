@@ -56,7 +56,7 @@ const typeDefs = `
     type Query {
         users: [User]
         user(_id: ID!): User
-        projects: [Project]
+        allProjects: [Project]
         singleProject(_id: ID!): Project
         me(_id: ID!): User
         commentsPerProject(projectId: ID!): [Comment]

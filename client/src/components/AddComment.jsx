@@ -26,6 +26,7 @@ export default function AddComment({ projectId }) {
             });
             setShowAlert(true);
             setCommentText('');
+            console.log(data);
         } catch (err) {
 
             throw err;

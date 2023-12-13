@@ -51,7 +51,7 @@ export default function CreateProject() {
   };
 
   return (<Container>
-    <h2>Want to start other campaigns/projects? Fill the form below:</h2>
+    <h2>Want to start another campaign/project? Fill the form below:</h2>
     <Row>
       <div>
         <h2>Add Project</h2>
@@ -72,7 +72,7 @@ export default function CreateProject() {
           <br />
           <Form.Group className="mb-3">
             <Form.Label htmlFor='expiresIn'>
-              What will be the deadline to donate money for the campaign?
+              For how many days you will be collecting funds for the campaign?
               <Form.Control type="text" name="expiresIn" value={formData.expiresIn} onChange={handleChange} />
             </Form.Label>
           </ Form.Group>

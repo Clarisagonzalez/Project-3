@@ -62,7 +62,7 @@ const SignUp = () => {
       <h2 style={{ textAlign: 'center', fontFamily:'Nunito, sans-serif'}} >Sign Up</h2>
       <Form noValidate validated={validated} className="align-center bg-secondary text-center" onSubmit={handleSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
+          Something went wrong with your signup! 
         </Alert>
         <Form.Group className="mb-3">
           <Form.Label>
@@ -97,11 +97,6 @@ const SignUp = () => {
           Sign Up
         </Button>
       </Form>
-      {error && (
-        <div className="my-3 p-3 bg-danger text-white">
-          {error.message}
-        </div>
-      )}
     </div>
   );
 };

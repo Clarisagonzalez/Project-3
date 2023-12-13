@@ -16,7 +16,6 @@ const userSchema = new Schema(
             required: true,
             trim: true,
             minLen: 5,
-            //match: /^[A-Z0-9-_]{3, }$/i //The username must contain at least 3 characters, they can be letters(lower or uppercase), numbers, dashes or underscores
         },
         email: {
             type: String,
@@ -29,7 +28,6 @@ const userSchema = new Schema(
             type: String,
             required: true,
             minLength: 8,
-            //match: /[0-9]+(\W)+(\S)+/ //The password must contain at one number and at least one non-word character; it must not contain whitespaces( at least one more non-whitespace character is required)
         },
 
         donations: [donationSchema],

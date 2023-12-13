@@ -13,12 +13,15 @@ const Footer = () => {
           <p>Email: contact@example.com</p>
           <p>Phone: +1 (123) 456-7890</p>
         </Col>
-
+        <Col>
+          <h3>Donate to the Site</h3>
+          <p>As a nonprofit organization we depend on the donations provided by socially, environmentally, and artistically aware people like you.</p>
+          <p>Please, click <a href='#nav'>Donate</a> in order to donate.</p>
+        </Col>
         <Col>
           <h3>Follow Us</h3>
           <div><a href="https://twitter.com/example" target="_blank" rel="noopener noreferrer">Twitter</a></div>
           <div><a href="https://facebook.com/example" target="_blank" rel="noopener noreferrer">Facebook</a></div>
-          {/* Add more links if needed */}
         </Col>
       </Row>
       <Row>

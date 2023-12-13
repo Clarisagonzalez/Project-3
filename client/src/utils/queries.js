@@ -16,13 +16,14 @@ export const QUERY_SINGLE_PROJECT = gql`
 
 export const QUERY_ALL_PROJECTS = gql`
   query allProjects{
-    projects {
+    allProjects {
       _id
       projectName
       projectDescription
       projectDate
       expiresIn
       goalAmount
+      userId
     }
   }
 `;
@@ -33,26 +34,17 @@ query user($_id: ID!){
           _id
         username
         email
-        donations{
-            amount
-            donationDate
-        }
-        comments {
-            commentText
-            commentDate
-            upvotes
-            projectId
-        }
-        projects {
-            projectname
-            projectdescription
-            projectDate
-            expiresIn
-            goalAmount
-        }
-      
+    projects{
+      _id
+      userId
+      projectName
+      projectDate
+      projectDescription
+      expiresIn
+      goalAmount
     }
   }
+}
 `;
 
 export const QUERY_ALL_USERS = gql`

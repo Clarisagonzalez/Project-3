@@ -14,10 +14,10 @@ export default function SingleUserDonations({ _id }) {
 
     return (
         <Row>
-            {donations.map((donation) => (
+            {!donations.length ? <h2>No donations so far...</h2> : (donations.map((donation) => (
                 <Col key={donation.donation._id}>
                     <SingleDonation {...donation} />
-                </Col>
+                </Col>)
             ))}
         </Row>
     );
