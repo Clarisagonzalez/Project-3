@@ -12,8 +12,17 @@ const Home = () => {
 
 
   return (
-    <Container style={{background:'lightgray'}}>
-      <Carousel style={{ maxWidth: '50vw', margin: 'auto'}}>
+    <Container style={{background:'#f2f2f2'}}>
+       <div className="text-center">
+        <h1 style={{ fontFamily: 'DM Serif Display'}}>Welcome to Unity Fund</h1>
+        <p style={{ marginBottom: '4rem', marginTop: '4rem', fontSize: '18px',  lineHeight: '35px'}}>
+          Explore our impactful campaigns, discover ways to make a difference, and join our
+          community of changemakers. Together, we can create a world where compassion and
+          generosity know no bounds.
+        </p>
+      </div>
+
+      <Carousel style={{ maxWidth: '50vw', margin: 'auto', marginBottom: '20px'}}>
         <Carousel.Item>
         <div className="d-flex justify-content-center">
           <Image src="/images/Donation.jpg" className='mx-auto' style={{ height: '50vh', width: 'auto' }} />
@@ -56,6 +65,8 @@ const Home = () => {
         </Carousel.Item>
       </Carousel>
     </Container>
+
+
   );
 }
 
