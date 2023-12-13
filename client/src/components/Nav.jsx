@@ -22,9 +22,10 @@ const NavBar = () => {
             <Nav.Link as={Link} to="/projects" style={{ textDecoration: 'none' }}>
               Projects
             </Nav.Link>
+            {Auth.loggedIn() &&
             <Nav.Link as={Link} to="/donate" style={{ textDecoration: 'none' }}>
               Donate
-            </Nav.Link>
+            </Nav.Link>}
           </Nav>
           <Nav>
             {!Auth.loggedIn() ? (

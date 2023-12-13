@@ -15,7 +15,7 @@ export default function MakeDonation({ projectId }) {
 
 
     const handleChange = (e) => {
-        setDonatedAmount(parseInt(e.target.value));
+        setDonatedAmount(parseFloat(e.target.value));
     };
 
     const handleSubmit = async (e) => {
@@ -25,8 +25,9 @@ export default function MakeDonation({ projectId }) {
                 variables: { projectId, amount: donatedAmount, donorId: Auth.getProfile().data._id }
             });
             setDonatedAmount(0);
-        } catch (err) {
             setShowAlert(true);
+
+        } catch (err) {
 
             throw err;
         }

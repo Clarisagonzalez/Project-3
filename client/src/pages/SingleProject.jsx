@@ -30,11 +30,11 @@ export default function SingleProject({ projectName, goalAmount, expiresIn, proj
                 <Card.Footer>
                    <a href=''>Click to go to the site!</a>
                 </Card.Footer>
-                {(Auth.getProfile().data._id !== userId)&&
+                {Auth.loggedIn() ? ((Auth.getProfile().data._id !== userId)&&
                 (<>
                 <AddComment projectId = {_id}/>
                 <MakeDonation projectId = {_id}/>
-                </>)}
+                </>) ): (<div className="text-danger">You have to be logged-in in order to donate or make comments</div>)}
                 <Link to={`/${_id}/comments`}>See all the available comments!</Link>
                 
             </Card>

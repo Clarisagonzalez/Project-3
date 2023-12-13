@@ -71,6 +71,20 @@ query allUsers {
     }
 }
 `;
+
+export const QUERY_SITE_DONATIONS = gql`
+query allSiteDonations {
+  siteDonations{
+    _id
+    donorId
+    donorName
+    donationAmount
+    paymentMethod
+    donationDate
+    donorComment
+  }
+}
+`
 export const ME = gql`
 query me($_id: ID!) {
     me(_id: $_id) {

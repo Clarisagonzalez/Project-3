@@ -6,7 +6,6 @@ const  donationSchema  = require('./donationSchema');
 
 
 const mongooseLeanGetters = require('mongoose-lean-getters');
-const mongooseLeanVirtuals = require('mongoose-lean-virtuals');
 
 const projectSchema = new Schema(
     {
@@ -49,39 +48,10 @@ const projectSchema = new Schema(
         comments: [commentSchema], 
         donations: [donationSchema]
 
-    },
-    {
-        toJSON: {
-            getters: true,
-            virtuals: true
-        },
-        id: false,
     }
 );
 
-projectSchema.virtual('amountCollected').get(function(){
-    return this.donations.reduce((total, current) => total + current, 0);
-});
-projectSchema.virtual('amountToReachGoal').get(function() {
-    let amountCollected = this.donations.reduce((total, current) => total + current, 0);
-    if(this.goalAmount >= amountCollected){
-        return this.goalAmount - amountCollected;
-    } else {
-        return 0;
-    }
-})
-
-
-projectSchema.virtual('numberOfDonations').get(function() {
-    return this.donations.length}
-    );
-
-projectSchema.virtual('numberOfComments').get(function() {
-    return this.comments.length}
-    );
-
 projectSchema.plugin(mongooseLeanGetters);
-projectSchema.plugin(mongooseLeanVirtuals);
 const Project = model('Project', projectSchema);
 
 module.exports =  Project;

@@ -38,6 +38,16 @@ const typeDefs = `
         projectId: ID
     }
 
+    type Site {
+        _id: ID
+        donorId: ID
+        donorName: String
+        donationAmount: Float
+        donorComment: String
+        paymentMethod: String
+        donationDate: String
+    }
+
     type Auth {
             token: ID!
             user: User
@@ -58,10 +68,10 @@ const typeDefs = `
         user(_id: ID!): User
         allProjects: [Project]
         singleProject(_id: ID!): Project
-        me(_id: ID!): User
         commentsPerProject(projectId: ID!): [Comment]
         allMyComments(_id: ID!): [CommentedProject]
         allMyDonations(_id: ID!): [ProjectDonatedTo]
+        allSiteDonations: [Site]!
         }
 
     type Mutation {
@@ -71,10 +81,13 @@ const typeDefs = `
         addProject(projectName: String!, projectDescription: String!, expiresIn: Int!, goalAmount: Float!, userId: ID): User
         addComment(commentText: String!, projectId: ID!, commentAuthor: ID!): Project
         upvoteComment(commentId: ID!,upvote: Boolean): Comment
-        addReply(replyText: String!): Comment
-        makeDonation(projectId: ID!, amount: Float!, donorId: ID! ) : User
+        makeDonation(projectId: ID!, amount: Float!, donorId: ID! ): User
+        makeSiteDonation(donorId: ID!, donorName: String!, donationAmount: Float!, paymentMethod: String!): Site
 
         updateUser(username: String, email: String, password: String): User
+
+        deleteComment(_id: ID!, commentId: ID!): User
+        deleteProject(_id: ID!, projectId: ID!): User
           }
         `;
     

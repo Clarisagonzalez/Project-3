@@ -8,12 +8,11 @@ const styles = {
   header: {
     backgroundColor: '#19747E',
     padding: '20px',
-    margin: '20px',
+    margin: 'auto',
     textAlign: 'center',
     color: '#D1E8E2',
     fontFamily: 'DM Serif Display',
     width: '100%',
-    margin: 'auto'
   },
   buttonRow: {
     marginTop: '20px'

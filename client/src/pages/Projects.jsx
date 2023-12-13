@@ -4,13 +4,12 @@ import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PROJECTS } from '../utils/queries';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Auth from '../utils/auth'
 
 export default  function Projects() {
     const location = useLocation();
 
     useEffect(() => {
-        if(Auth.loggedIn()) document.title = `Seeing all current projects!`
+         document.title = `Seeing all current projects!`
         return () => { 
             if(location.pathname !== '/projects') document.title = 'Unity Fund'
         }

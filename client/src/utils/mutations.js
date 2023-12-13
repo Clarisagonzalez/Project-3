@@ -65,21 +65,6 @@ mutation updateUser($username: String, $email: String, $password: String){
     }
 }`;
 
-export const MAKE_DONATION2 = gql`
-mutation makeDonation($projectId: ID!, $amount: Float!){
-  makeDonation(projectId: $projectId, amount: $amount){
-  _id
-  username
-  email
-  donations{
-    donorId
-    amount
-    donationDate
-    projectId
-  }
- }
-}`
-
 export const MAKE_DONATION = gql `
 mutation makeDonation($projectId: ID!, $amount: Float!, $donorId: ID!){
   makeDonation(projectId: $projectId, amount: $amount, donorId: $donorId){
@@ -96,3 +81,46 @@ mutation makeDonation($projectId: ID!, $amount: Float!, $donorId: ID!){
   }
 }
 `;
+
+export const MAKE_SITE_DONATION = gql`
+    mutation makeSiteDonation($donorId: ID!, $donorName: String!, $donationAmount: Float!, $paymentMethod: String!, $donorComment: String ){
+        siteDonation(donorId: $donorId, donorName: $donorName, donationAmount: $donationAmount, paymentMethod: $paymentMethod, donorComment: $donorComment) {
+            _id
+            donorId
+            donorName
+            donationDate
+            donationAmount
+            paymentMethod
+            donorComment
+        }
+    }`
+
+export const DELETE_COMMENT = gql`
+    mutation deleteComment($_id: ID!, $commentId: ID!) {
+        updatedUser(_id: $_id, commentId: $commentId){
+            _id
+            username
+            email
+            comments{
+                _id
+                projectId
+                commentText
+            }
+        }
+    }`
+
+export const DELETE_PROJECT = gql`
+    mutation deleteProject($_id: ID!, $projectId: ID!) {
+        updatedUser(_id: $_id, projectId: $projectId){
+            _id
+            username
+            email
+            projects{
+                _id
+                projectName
+                projectDescription
+                projectName
+                goalAmount
+            }
+        }
+    }` 

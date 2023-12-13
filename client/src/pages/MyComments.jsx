@@ -1,12 +1,16 @@
-import { Container, Row, Col, Card} from 'react-bootstrap';
+import { Container, Row, Col} from 'react-bootstrap';
 import SingleComment from '../components/SingleComment';
 import {ALL_MY_COMMENTS} from '../utils/queries';
 import { useQuery } from '@apollo/client';
 import Auth from '../utils/auth';
+import DeleteComment from '../components/DeleteComment';
 
 export default function MyComments() {
+
+    const _id = Auth.getProfile().data._id;
+
     const { loading, data } = useQuery(ALL_MY_COMMENTS, {
-        variables: { _id: Auth.getProfile().data._id }
+        variables: { _id }
     });
     const myComments = data?.allMyComments || [];
     if(loading) return <div> Loading... </div>
@@ -19,6 +23,7 @@ export default function MyComments() {
           {myComments.length ? (myComments.map((comment) =>
           (<Col sm={12} md={6} key={comment.comment._id}>
            <SingleComment {...comment} />
+           <DeleteComment commentId= {comment.comment._id} _id ={_id}/>
           </Col>))) : <h2>You haven't commented on any project yet. Kind suggestions are always welcome!</h2>}
         </Row>
       </Container>

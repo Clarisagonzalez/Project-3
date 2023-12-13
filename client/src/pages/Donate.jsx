@@ -1,42 +1,39 @@
-import { Alert, Form, Col, Button, Card} from 'react-bootstrap';
+import { Alert, Form, Dropdown, InputGroup, Button, Card } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_SINGLE_PROJECT } from '../utils/queries';
-import { MAKE_DONATION } from '../utils/mutations';
-import SingleProject from './SingleProject';
+import { QUERY_SITE_DONATIONS } from '../utils/queries';
+import { MAKE_SITE_DONATION } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 const Donate = () => {
 
   useEffect(() => {
-    document.title = `Go ahead, help a cause today!`
+    document.title = `Go ahead, help us make the world a better place!`
     return () => {
       if (location.pathname !== '/donate') document.title = 'Unity Fund'
     }
   }, []);
 
-  const { id } = useParams();
+  const donorId = Auth.getProfile().data._id;
+  const donorName = Auth.getProfile().data.username;
 
   const initialState = {
-    amount: 0,
-    paymentMethod: null
+    donorName: donorName,
+    donorId: donorId,
+    donationAmount: 0,
+    donorComment: '',
+    paymentMethod: ''
   };
 
   const [donationData, setDonationData] = useState(initialState);
   const [showAlert, setShowAlert] = useState(false);
-  const [makeDonation, { error }] = useMutation(MAKE_DONATION);
+  const [makeDonation, { error }] = useMutation(MAKE_SITE_DONATION);
 
+  const { data, loading } = useQuery(QUERY_SITE_DONATIONS);
 
-  const { data, loading, queryError } = useQuery(QUERY_SINGLE_PROJECT, {
-    variables: {
-      projectId: id
-    }
-  });
-
-  const project = data?.project || {};
-  ;
-  if (loading) return <div> Loading...</div>
-
+  const donations = data?.siteDonations || [];
+  if (loading) return <div>Loading...</div>;
+  console.log(data);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,12 +42,14 @@ const Donate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     try {
+      donationData.donationAmount = parseFloat(donationData.donationAmount);
+      console.log(donationData);
       await makeDonation({
-        variables: { ...donationData }
+        variables: {...donationData}
       });
-
+            
       setDonationData(initialState);
 
     } catch (err) {
@@ -63,49 +62,52 @@ const Donate = () => {
     <>
       <Card >
         <Card.Header>
-          <h3>{project.projectName}</h3>
-          Amount that needs to be raised ${project.goalAmount}!<br />
-          Hurry! This campaign expires in {project.expiresIn} days!
+          All donations received to date:
         </Card.Header>
         <Card.Body>
-          {!project.donations.length ? (<div> No donations yet...</div>) : (project.donations.map(donation => (
+          {!donations.length ? (<div> No donations have been received yet...</div>) : (donations.map(donation => (
             <>
-            <div>{donation.amount}</div><br/>
-            <div>{donation.donationDate}</div><br/>
-            <div>{donation.donorId}</div>
+              <h2>Thank you {donation.donorName}</h2>
+              <p>We received {donation.donationAmount} from you on the date {donation.donationDate}</p>
             </>
           )))}
         </Card.Body>
+        <hr/>
       </Card>
       <div>
-        <h2>Donate to {project.projectName}</h2>
+        <h2>Donate to Unity_Fund!</h2>
         <Form className='bg-secondary text-center' onSubmit={handleSubmit}>
           {error && <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-            Something went wrong with your login credentials!
-            <br />
             {error.message}
           </Alert>}
           <Form.Group className="mb-3">
-            <Form.Label htmlFor='amount'>
+            <Form.Label htmlFor='donationAmount'>
               Amount to Donate:
-              <Form.Control type="text" name="amount" placeholder="Enter the donation in USD($)" value={donationData.amount} onChange={handleChange} required />
+              <Form.Control type="text" name="donationAmount" placeholder="Enter the donation in USD($)"  onChange={handleChange} required />
             </Form.Label>
             <Form.Control.Feedback type='invalid'>Please, specify the amount to donate.</Form.Control.Feedback>
           </Form.Group>
           <br />
-          <Form.Group className="mb-3">
-            <Form.Label htmlFor='password'>
-              Method of Payment:
-              <Form.Control type="text" name="paymentType" placeholder="Enter the method of payment" value={donationData.paymentType} onChange={handleChange} required />
-            </Form.Label>
-            <Form.Control.Feedback type='invalid'>You need to stipulate the method of payment!</Form.Control.Feedback>
-          </Form.Group>
-          <br />
+          <InputGroup>
+            <InputGroup.Text>Your input is important to us. Leave any comment or suggestion you have!</InputGroup.Text>
+            <Form.Control as="textarea" name="donorComment" onChange={handleChange} />
+          </InputGroup>
+          <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Select Method of Payment
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item onClick={()=>{setDonationData({ ...donationData, paymentMethod: 'Debit Card' })}}>Debit Card</Dropdown.Item>
+                    <Dropdown.Item onClick={()=>{setDonationData({ ...donationData, paymentMethod: 'Credit Card' })}}>Credit Card</Dropdown.Item>
+                    <Dropdown.Item onClick={()=>{setDonationData({ ...donationData, paymentMethod: 'Digital Wallet' })}}>Digital Wallet</Dropdown.Item>
+                    <Dropdown.Item onClick={()=>{setDonationData({ ...donationData, paymentMethod: 'Other' })}}>Other</Dropdown.Item>
+                </Dropdown.Menu>
+          </Dropdown>
+          <br/>
           <Button
-            disabled={!(donationData.amount && donationData.paymentType)}
-            variant="primary"
+            variant="success"
             type="submit">
-            Make Donation!
+            Thanks for your donation!
           </Button>
         </Form>
       </div>
