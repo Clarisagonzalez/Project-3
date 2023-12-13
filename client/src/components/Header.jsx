@@ -11,7 +11,7 @@ const styles = {
     margin: '20px',
     textAlign: 'center',
     color: '#D1E8E2',
-    fontFamily: 'Nunito, sans-serif',
+    fontFamily: 'DM Serif Display',
     width: '100%',
   },
   buttonRow: {
