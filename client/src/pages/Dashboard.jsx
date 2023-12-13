@@ -5,7 +5,6 @@ import { useQuery} from '@apollo/client';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { QUERY_USER } from '../utils/queries';
 import Auth from '../utils/auth';
-import DeleteProject from '../components/DeleteProject';
 
 export default function Dashboard() {
 
@@ -26,7 +25,7 @@ export default function Dashboard() {
   data?.user.projects ? myProjects = data?.user.projects : myProjects = [];
   if (loading) return (<div>Loading...</div>);
 
-
+  const projectIds = myProjects.map((project) => project._id);
   return (
     <>
       <Container>
@@ -39,7 +38,6 @@ export default function Dashboard() {
           {myProjects.map(project =>
           (<Col sm={12} md={6} key={project._id}>
             <SingleProject {...project} />
-            <DeleteProject projectId={project._id} _id={_id} />
           </Col>))}
         </Row>
       </Container>): (<h2 className='text-center'>You still haven't contributed any project. Click "Propose a new project" below to start today!</h2>)}

@@ -1,25 +1,26 @@
 import { Button } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { DELETE_PROJECT } from '../utils/mutations';
+import Auth from '../utils/auth';
 
-export default function DeleteComment({ projectId, _id }) {
+export default function DeleteComment({ projectId}) {
 
-    const [deleteProject, { error }] = useMutation(DELETE_PROJECT);
+    const userId = Auth.getProfile().data._id;
+    const [deleteProject] = useMutation(DELETE_PROJECT);
 
-    const deleteHandler = async (_id, projectId) => {
-
+    const deleteHandler = async (userId, projectId) => {
         try {
             await deleteProject({
-                variables: { _id: _id, projectId: projectId }
+                variables: { userId, projectId: projectId }
             });
-            location.reload();
+            window.location.reload();
         } catch (err) {
-            console.error(err);
-        }
+            throw err       
+         }
     };
     return (
         <div>
-            <Button variant='ligth' className='text-danger' onClick={() => deleteHandler(projectId, _id)}>Delete this project</Button>
+            <Button variant='ligth' className='text-danger' onClick={async () => deleteHandler(projectId, userId)}>Delete this project</Button>
         </div>
     );
 }

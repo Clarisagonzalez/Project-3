@@ -229,28 +229,31 @@ const resolvers = {
                 throw err; 
             }
         },
-        deleteComment: async (parent, { _id, commentId }) => {
+        deleteComment: async (parent, { _id}) => {
             try {
                 const user = await User.findOneAndUpdate(
                     {_id: _id},
                     {
                         $pull: {
-                            comments: {_id: commentId}
+                            comments: {commentAuthor: _id}
                         }
                     },
                     { new: true});
                 return user; 
             } catch(err) {
                 throw err;
-            }
-        },
-        deleteProject: async (parent, { _id, projectId }) => {
+            
+        }
+    },
+
+        deleteProject: async (parent, { userId, projectId }) => {
             try {
+                await Project.findByIdAndDelete(projectId)
                 const user = await User.findOneAndUpdate(
-                    {_id: _id},
+                    {_id: userId},
                     {
                         $pull: {
-                            projects:{ _id: projectId}
+                            projects: { _id: projectId}
                         }
                     },
                     { new: true });

@@ -86,8 +86,8 @@ const typeDefs = `
 
         updateUser(username: String, email: String, password: String): User
 
-        deleteComment(_id: ID!, commentId: ID!): User
-        deleteProject(_id: ID!, projectId: ID!): User
+        deleteComment(_id: ID!): User
+        deleteProject(userId: ID!, projectId: ID!): User
           }
         `;
     

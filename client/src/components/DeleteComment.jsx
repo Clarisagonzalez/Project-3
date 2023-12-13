@@ -2,24 +2,23 @@ import { Button } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 import { DELETE_COMMENT } from '../utils/mutations';
 
-export default function DeleteComment({ commentId, _id }) {
+export default function DeleteComment({  _id }) {
    
-    const [deleteComment, { error }] = useMutation(DELETE_COMMENT);
+    const [deleteComment] = useMutation(DELETE_COMMENT);
         
-    const deleteHandler = async (_id, commentId) => {
+    const deleteHandler = async (_id) => {
         try{
-       await deleteComment({
-            variables: { id: _id, commentId: commentId }
+         const { data } = await deleteComment({
+            variables: { _id }
         });
-        if(error) console.log(error);
-        location.reload();
+        window.location.reload();
     } catch(err) {
-        console.error(err);
+        throw err;
     }
     };
     return (
         <div>
-        <Button variant='ligth' className='text-danger' onClick={()=> deleteHandler(commentId, _id)}>Delete this comment</Button>
+        <Button variant='ligth' className='text-danger' onClick={async ()=> deleteHandler(_id)}>Delete this comment</Button>
         </div>
     );
 }

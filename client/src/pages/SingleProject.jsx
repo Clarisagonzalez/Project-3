@@ -1,10 +1,11 @@
-import { Card } from 'react-bootstrap';
+import { Card, Button} from 'react-bootstrap';
 import Auth from '../utils/auth';
 import AddComment from '../components/AddComment';
 import MakeDonation from '../components/MakeDonation';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { QUERY_USER } from '../utils/queries';
+import DeleteProject from '../components/DeleteProject';
 
 export default function SingleProject({ projectName, goalAmount, expiresIn, projectDate, projectDescription, _id , userId}) {
     const { data, loading } = useQuery(QUERY_USER, {
@@ -30,6 +31,7 @@ export default function SingleProject({ projectName, goalAmount, expiresIn, proj
                 <Card.Footer>
                    <a href=''>Click to go to the site!</a>
                 </Card.Footer>
+                {Auth.loggedIn() && <DeleteProject projectId= {_id}/>}
                 {Auth.loggedIn() ? ((Auth.getProfile().data._id !== userId)&&
                 (<>
                 <AddComment projectId = {_id}/>

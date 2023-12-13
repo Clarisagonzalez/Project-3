@@ -23,7 +23,7 @@ export default function MyComments() {
           {myComments.length ? (myComments.map((comment) =>
           (<Col sm={12} md={6} key={comment.comment._id}>
            <SingleComment {...comment} />
-           <DeleteComment commentId= {comment.comment._id} _id ={_id}/>
+           <DeleteComment _id ={_id}/>
           </Col>))) : <h2>You haven't commented on any project yet. Kind suggestions are always welcome!</h2>}
         </Row>
       </Container>

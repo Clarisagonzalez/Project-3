@@ -96,8 +96,8 @@ export const MAKE_SITE_DONATION = gql`
     }`
 
 export const DELETE_COMMENT = gql`
-    mutation deleteComment($_id: ID!, $commentId: ID!) {
-        updatedUser(_id: $_id, commentId: $commentId){
+    mutation deleteComment($_id: ID!) {
+        deleteComment(_id: $_id){
             _id
             username
             email
@@ -110,17 +110,13 @@ export const DELETE_COMMENT = gql`
     }`
 
 export const DELETE_PROJECT = gql`
-    mutation deleteProject($_id: ID!, $projectId: ID!) {
-        updatedUser(_id: $_id, projectId: $projectId){
+    mutation deleteProject($userId: ID!, $projectId: ID!) {
+        deleteProject(userId: $userId, projectId: $projectId){
             _id
             username
             email
             projects{
                 _id
-                projectName
-                projectDescription
-                projectName
-                goalAmount
             }
         }
     }` 
